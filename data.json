@@ -1,1 +1,25 @@
-{"last_updated": "Nunca", "productos": []}
+{
+  "last_updated": "2026-01-27 21:42:24",
+  "productos": [
+    {
+      "id": "B08N5WRWJ6",
+      "nombre": "MacBook Air M1",
+      "precio_amazon": 929.0,
+      "precio_competencia": 1020.0,
+      "tienda_competencia": "MediaMarkt",
+      "ahorro_porcentaje": 9,
+      "url_afiliado": "https://www.amazon.es/dp/B08N5WRWJ6?tag=TU_TAG_AFILIADO",
+      "imagen": "url_obtenida_por_api"
+    },
+    {
+      "id": "B09G96T6CC",
+      "nombre": "Sony WH-1000XM5",
+      "precio_amazon": 929.0,
+      "precio_competencia": 1020.0,
+      "tienda_competencia": "MediaMarkt",
+      "ahorro_porcentaje": 9,
+      "url_afiliado": "https://www.amazon.es/dp/B09G96T6CC?tag=TU_TAG_AFILIADO",
+      "imagen": "url_obtenida_por_api"
+    }
+  ]
+}
