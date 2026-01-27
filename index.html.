@@ -2,67 +2,62 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CholloTracker - Comparador de Precios</title>
+    <title>CholloTracker - Amazon vs Competencia</title>
     <style>
-        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
-        header { background-color: #232f3e; color: white; padding: 20px; text-align: center; }
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        .card img { max-width: 100%; h-eight: 180px; object-fit: contain; }
-        .price-amz { color: #b12704; font-size: 24px; font-weight: bold; }
-        .price-old { color: #565959; text-decoration: line-through; font-size: 14px; }
-        .badge { background-color: #e67e22; color: white; padding: 5px 10px; border-radius: 4px; font-size: 12px; }
-        .btn { display: block; background-color: #ffd814; color: black; padding: 10px; margin-top: 15px; 
-               text-decoration: none; border-radius: 20px; font-weight: bold; border: 1px solid #fcd200; }
-        footer { text-align: center; padding: 40px; color: #666; font-size: 12px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f3f3f3; margin: 0; }
+        header { background-color: #232f3e; color: white; padding: 1.5rem; text-align: center; shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { background: white; border-radius: 10px; padding: 1.5rem; border: 1px solid #ddd; text-align: center; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .card img { max-width: 100%; height: 200px; object-fit: contain; }
+        .badge { background: #e67e22; color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; }
+        .price-amz { color: #B12704; font-size: 1.5rem; font-weight: bold; margin: 10px 0; }
+        .price-comp { color: #565959; text-decoration: line-through; font-size: 0.9rem; }
+        .btn { display: block; background: #ffd814; color: black; text-decoration: none; padding: 12px; border-radius: 25px; font-weight: bold; margin-top: 1rem; border: 1px solid #fcd200; }
+        footer { background: white; padding: 2rem; text-align: center; border-top: 1px solid #ddd; margin-top: 4rem; color: #666; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>CholloTracker</h1>
-    <p id="update-date">Cargando ofertas...</p>
+    <p id="status">Buscando las mejores ofertas...</p>
 </header>
 
 <div class="container">
-    <div id="productos-grid" class="grid">
-        </div>
+    <div id="grid" class="grid"></div>
 </div>
 
 <footer>
-    <p>Como afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</p>
+    <p>Aviso: Los precios pueden variar. Como afiliado de Amazon, percibo dinero con las compras elegibles.</p>
 </footer>
 
 <script>
-    // Script para leer el JSON y dibujar los productos
     fetch('data.json')
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
-            document.getElementById('update-date').innerText = "Última actualización: " + data.last_updated;
-            const grid = document.getElementById('productos-grid');
-            
-            if (data.productos.length === 0) {
-                grid.innerHTML = "<p>Buscando nuevos chollos... Vuelve en unos minutos.</p>";
+            document.getElementById('status').innerText = "Última actualización: " + data.last_updated;
+            const grid = document.getElementById('grid');
+            if(data.productos.length === 0) {
+                grid.innerHTML = "<h3>Hoy no hay diferencias de precio detectadas. ¡Vuelve pronto!</h3>";
+                return;
             }
-
             data.productos.forEach(p => {
                 grid.innerHTML += `
                     <div class="card">
-                        <span class="badge">Amazon más barato</span>
-                        <img src="${p.imagen}" alt="${p.nombre}">
+                        <span class="badge">Ahorras ${p.ahorro_porcentaje}%</span>
+                        <img src="${p.imagen}" alt="Producto">
                         <h3>${p.nombre}</h3>
-                        <p class="price-old">En ${p.tienda_competencia}: ${p.precio_competencia}€</p>
+                        <p class="price-comp">En ${p.tienda_competencia}: ${p.precio_competencia}€</p>
                         <p class="price-amz">Amazon: ${p.precio_amazon}€</p>
-                        <a href="${p.url_afiliado}" class="btn">Ver en Amazon</a>
+                        <a href="${p.url_afiliado}" class="btn">Ver Chollo en Amazon</a>
                     </div>
                 `;
             });
-        })
-        .catch(err => {
-            document.getElementById('productos-grid').innerHTML = "Error al cargar los datos. Asegúrate de que el robot ya haya corrido.";
+        }).catch(() => {
+            document.getElementById('grid').innerHTML = "<h3>Esperando la primera carga de datos del robot...</h3>";
         });
 </script>
-
 </body>
 </html>
