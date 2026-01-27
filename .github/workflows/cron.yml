@@ -1,0 +1,28 @@
+name: Actualizador de Precios Diario
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Se ejecuta cada 6 horas
+  workflow_dispatch: # Permite ejecutarlo a mano para probar
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Ejecutar script de comparación
+        run: python update_prices.py
+
+      - name: Subir cambios a GitHub
+        run: |
+          git config --global user.name 'PriceBot'
+          git config --global user.email 'bot@github.com'
+          git add data.json
+          git commit -m "Precios actualizados $(date)" || exit 0
+          git push
