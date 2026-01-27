@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CholloBot - Comparador Estático</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-black text-white p-6 text-center">
+        <h1 class="text-2xl font-bold">Ofertas Amazon vs Competencia</h1>
+        <p id="last-update" class="text-xs opacity-70 mt-2">Cargando actualización...</p>
+    </header>
+
+    <main id="app" class="p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        </main>
+
+    <script>
+        // Este script lee el JSON que genera el robot
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('last-update').innerText = "Actualizado: " + data.last_updated;
+                const container = document.getElementById('app');
+                
+                data.productos.forEach(prod => {
+                    // Solo mostramos si Amazon es más barato
+                    if(prod.precio_amazon < prod.precio_competencia) {
+                        container.innerHTML += `
+                            <div class="bg-white p-4 rounded shadow-lg border-t-4 border-green-500">
+                                <img src="${prod.imagen}" class="h-40 mx-auto">
+                                <h2 class="font-bold mt-2">${prod.nombre}</h2>
+                                <p class="text-green-600 font-bold text-xl">Amazon: ${prod.precio_amazon}€</p>
+                                <p class="text-gray-400 text-sm line-through">Otros: ${prod.precio_competencia}€</p>
+                                <a href="${prod.url_afiliado}" class="block bg-yellow-400 text-center py-2 mt-4 rounded font-bold">Ver Chollo</a>
+                            </div>
+                        `;
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
