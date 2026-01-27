@@ -2,41 +2,67 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CholloBot - Comparador Estático</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>CholloTracker - Comparador de Precios</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        header { background-color: #232f3e; color: white; padding: 20px; text-align: center; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        .card img { max-width: 100%; h-eight: 180px; object-fit: contain; }
+        .price-amz { color: #b12704; font-size: 24px; font-weight: bold; }
+        .price-old { color: #565959; text-decoration: line-through; font-size: 14px; }
+        .badge { background-color: #e67e22; color: white; padding: 5px 10px; border-radius: 4px; font-size: 12px; }
+        .btn { display: block; background-color: #ffd814; color: black; padding: 10px; margin-top: 15px; 
+               text-decoration: none; border-radius: 20px; font-weight: bold; border: 1px solid #fcd200; }
+        footer { text-align: center; padding: 40px; color: #666; font-size: 12px; }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-black text-white p-6 text-center">
-        <h1 class="text-2xl font-bold">Ofertas Amazon vs Competencia</h1>
-        <p id="last-update" class="text-xs opacity-70 mt-2">Cargando actualización...</p>
-    </header>
+<body>
 
-    <main id="app" class="p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-        </main>
+<header>
+    <h1>CholloTracker</h1>
+    <p id="update-date">Cargando ofertas...</p>
+</header>
 
-    <script>
-        // Este script lee el JSON que genera el robot
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('last-update').innerText = "Actualizado: " + data.last_updated;
-                const container = document.getElementById('app');
-                
-                data.productos.forEach(prod => {
-                    // Solo mostramos si Amazon es más barato
-                    if(prod.precio_amazon < prod.precio_competencia) {
-                        container.innerHTML += `
-                            <div class="bg-white p-4 rounded shadow-lg border-t-4 border-green-500">
-                                <img src="${prod.imagen}" class="h-40 mx-auto">
-                                <h2 class="font-bold mt-2">${prod.nombre}</h2>
-                                <p class="text-green-600 font-bold text-xl">Amazon: ${prod.precio_amazon}€</p>
-                                <p class="text-gray-400 text-sm line-through">Otros: ${prod.precio_competencia}€</p>
-                                <a href="${prod.url_afiliado}" class="block bg-yellow-400 text-center py-2 mt-4 rounded font-bold">Ver Chollo</a>
-                            </div>
-                        `;
-                    }
-                });
+<div class="container">
+    <div id="productos-grid" class="grid">
+        </div>
+</div>
+
+<footer>
+    <p>Como afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</p>
+</footer>
+
+<script>
+    // Script para leer el JSON y dibujar los productos
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('update-date').innerText = "Última actualización: " + data.last_updated;
+            const grid = document.getElementById('productos-grid');
+            
+            if (data.productos.length === 0) {
+                grid.innerHTML = "<p>Buscando nuevos chollos... Vuelve en unos minutos.</p>";
+            }
+
+            data.productos.forEach(p => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <span class="badge">Amazon más barato</span>
+                        <img src="${p.imagen}" alt="${p.nombre}">
+                        <h3>${p.nombre}</h3>
+                        <p class="price-old">En ${p.tienda_competencia}: ${p.precio_competencia}€</p>
+                        <p class="price-amz">Amazon: ${p.precio_amazon}€</p>
+                        <a href="${p.url_afiliado}" class="btn">Ver en Amazon</a>
+                    </div>
+                `;
             });
-    </script>
+        })
+        .catch(err => {
+            document.getElementById('productos-grid').innerHTML = "Error al cargar los datos. Asegúrate de que el robot ya haya corrido.";
+        });
+</script>
+
 </body>
 </html>
