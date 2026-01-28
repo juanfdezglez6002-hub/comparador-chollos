@@ -3,84 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CholloTracker | Ofertas Amazon</title>
+    <title>CholloTracker | Ofertas Premium</title>
     <style>
-        :root { --amz-orange: #FF9900; --amz-dark: #232F3E; --discount: #CC0C39; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f2; margin: 0; }
-        header { background-color: var(--amz-dark); color: white; padding: 25px 20px; text-align: center; }
+        /* Paleta de colores y variables */
+        :root {
+            --primary: #ff9900;
+            --dark-bg: #131921;
+            --card-bg: #ffffff;
+            --text-main: #232f3e;
+            --accent-red: #cc0c39;
+            --gradient: linear-gradient(135deg, #232f3e 0%, #131921 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f0f2f2;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        /* Encabezado Estilo App */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
         
-        /* ZONA LEGAL OBLIGATORIA */
-        .disclaimer { 
-            background: #fff; border: 1px solid #ddd; padding: 10px; font-size: 0.75rem; 
-            color: #555; max-width: 1000px; margin: 15px auto; border-radius: 5px; line-height: 1.4;
+        /* Disclaimer Legal Obligatorio */
+        .amazon-disclosure {
+            background: #fff3e0;
+            border: 1px solid #ffe0b2;
+            padding: 12px;
+            font-size: 0.8rem;
+            max-width: 800px;
+            margin: -20px auto 20px;
+            border-radius: 8px;
+            color: #666;
+            position: relative;
+            z-index: 10;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .category-title { border-left: 6px solid var(--amz-orange); padding-left: 15px; margin: 40px 0 20px; color: var(--amz-dark); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        
-        /* TARJETAS MEJORADAS */
-        .card { background: white; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid #ddd; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .img-container { position: relative; padding: 20px; height: 200px; display: flex; align-items: center; justify-content: center; }
-        .card img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .badge { position: absolute; top: 10px; right: 10px; background: var(--discount); color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; }
-        
-        .info { padding: 20px; flex-grow: 1; text-align: left; }
-        .info h3 { font-size: 1.05rem; margin: 0 0 10px; color: #111; height: 2.8rem; overflow: hidden; }
-        .price-now { color: #B12704; font-size: 1.5rem; font-weight: bold; }
-        .price-old { color: #565959; text-decoration: line-through; font-size: 0.85rem; margin-left: 10px; }
-        
-        .btn { background: var(--amz-orange); color: black; text-align: center; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; display: block; margin-top: 15px; }
-        .btn:hover { background: #f7df66; }
+
+        /* Títulos de sección */
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin: 40px 0 20px;
+        }
+        .category-header h2 {
+            font-size: 1.8rem;
+            margin: 0;
+            background: var(--primary);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 50px;
+        }
+
+        /* Grid de Productos */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Tarjeta Estilo Premium */
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+
+        .image-wrapper {
+            height: 220px;
+            padding: 20px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+
+        .content h3 { font-size: 1.1rem; margin: 0 0 10px; height: 2.6rem; overflow: hidden; }
+
+        .price-section { margin: 15px 0; }
+        .current-price { font-size: 1.8rem; font-weight: 800; color: #b12704; }
+        .original-price { color: #767676; text-decoration: line-through; margin-left: 8px; font-size: 0.9rem; }
+
+        .buy-button {
+            background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+            border: 1px solid #a88734;
+            color: #111;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .buy-button:hover { background: #f0c14b; }
+
+        #loading-info { text-align: center; padding: 50px; font-size: 1.2rem; color: #666; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>CholloTracker</h1>
-    <div id="status" style="font-size: 0.8rem; opacity: 0.8;">Sincronizando...</div>
+    <h1>CholloTracker Pro</h1>
+    <p id="update-time">Sincronizando con Amazon...</p>
 </header>
 
 <div class="container">
-    <div class="disclaimer">
-        <strong>Aviso:</strong> Como Afiliado de Amazon, percibo dinero con las compras elegibles. Los precios y la disponibilidad pueden variar. Al hacer clic en "Ver Chollo", serás redirigido a Amazon.es.
+    <div class="amazon-disclosure">
+        <strong>Transparencia:</strong> Al hacer clic en los botones de compra, serás redirigido a Amazon.es. Como afiliado, recibo una comisión por compras elegibles, lo cual ayuda a mantener esta web gratis para ti.
     </div>
 
-    <div id="main"></div>
+    <div id="loading-info">Buscando los mejores chollos...</div>
+    <div id="main-content"></div>
 </div>
 
 <script>
     fetch('data.json?v=' + Date.now())
-        .then(r => r.json())
+        .then(res => res.json())
         .then(data => {
-            document.getElementById('status').innerText = "Última actualización: " + data.last_updated;
-            const main = document.getElementById('main');
+            document.getElementById('loading-info').style.display = 'none';
+            document.getElementById('update-time').innerText = "Últimos precios actualizados: " + data.last_updated;
             
+            const main = document.getElementById('main-content');
             const grouped = data.productos.reduce((acc, p) => {
                 (acc[p.categoria] = acc[p.categoria] || []).push(p);
                 return acc;
             }, {});
 
             for (const cat in grouped) {
-                const sec = document.createElement('div');
-                sec.innerHTML = `<h2 class="category-title">${cat}</h2><div class="grid" id="grid-${cat}"></div>`;
-                main.appendChild(sec);
+                const section = document.createElement('section');
+                section.innerHTML = `
+                    <div class="category-header"><h2>${cat}</h2></div>
+                    <div class="product-grid" id="grid-${cat}"></div>
+                `;
+                main.appendChild(section);
+
                 const grid = document.getElementById(`grid-${cat}`);
                 grouped[cat].forEach(p => {
                     grid.innerHTML += `
-                        <div class="card">
-                            <div class="img-container">
-                                <div class="badge">-${p.ahorro_porcentaje}%</div>
+                        <div class="product-card">
+                            <div class="discount-badge">-${p.ahorro_porcentaje}%</div>
+                            <div class="image-wrapper">
                                 <img src="${p.imagen}" alt="${p.nombre}">
                             </div>
-                            <div class="info">
+                            <div class="content">
                                 <h3>${p.nombre}</h3>
-                                <div>
-                                    <span class="price-now">${p.precio_amazon}€</span>
-                                    <span class="price-old">${p.precio_competencia}€</span>
+                                <div class="price-section">
+                                    <span class="current-price">${p.precio_amazon}€</span>
+                                    <span class="original-price">${p.precio_competencia}€</span>
                                 </div>
-                                <a href="${p.url_afiliado}" target="_blank" class="btn">Ver Chollo en Amazon</a>
+                                <a href="${p.url_afiliado}" target="_blank" class="buy-button">Ver en Amazon</a>
                             </div>
                         </div>
                     `;
