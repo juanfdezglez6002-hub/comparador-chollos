@@ -8,7 +8,7 @@ from datetime import datetime
 # 2. Copia el código ASIN (está en la URL después de /dp/...)
 # 3. Ponle un nombre, una categoría y el precio de la competencia
 PRODUCTOS = [
-    {"asin": "B08H75RTZ8", "nombre": "Consola PlayStation 5", "cat": "Gaming", "comp": 549.99},
+    {"asin": "B0CKC33GD2", "nombre": "Consola PlayStation 5", "cat": "Gaming", "comp": 549.99},
     {"asin": "B09G96TFFG", "nombre": "Apple iPhone 13 (128 GB)", "cat": "Electrónica", "comp": 729.00},
     {"asin": "B07PMLGP77", "nombre": "L'Or Espresso Café 100 Cápsulas", "cat": "Comida", "comp": 35.50},
     # Añade más líneas aquí siguiendo el mismo formato
