@@ -3,72 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CholloTracker | Mejores Ofertas</title>
+    <title>CholloTracker | Ofertas Amazon</title>
     <style>
         :root { --amz-orange: #FF9900; --amz-dark: #232F3E; --discount: #CC0C39; }
-        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f2; margin: 0; padding: 0; }
-        header { background-color: var(--amz-dark); color: white; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        .update-tag { font-size: 0.8rem; opacity: 0.7; margin-top: 5px; }
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
-        .category-title { border-left: 6px solid var(--amz-orange); padding-left: 15px; margin: 40px 0 20px; color: var(--amz-dark); font-size: 1.5rem; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f2; margin: 0; }
+        header { background-color: var(--amz-dark); color: white; padding: 25px 20px; text-align: center; }
+        
+        /* ZONA LEGAL OBLIGATORIA */
+        .disclaimer { 
+            background: #fff; border: 1px solid #ddd; padding: 10px; font-size: 0.75rem; 
+            color: #555; max-width: 1000px; margin: 15px auto; border-radius: 5px; line-height: 1.4;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .category-title { border-left: 6px solid var(--amz-orange); padding-left: 15px; margin: 40px 0 20px; color: var(--amz-dark); }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: white; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; border: 1px solid #ddd; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .img-container { position: relative; background: #fff; padding: 20px; text-align: center; }
-        .card img { max-width: 100%; height: 200px; object-fit: contain; }
-        .badge { position: absolute; top: 10px; right: 10px; background: var(--discount); color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
-        .info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .info h3 { font-size: 1.1rem; margin: 0 0 10px; color: #333; height: 2.8rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .price-box { margin-bottom: 15px; }
-        .price-now { color: #B12704; font-size: 1.6rem; font-weight: bold; }
-        .price-old { color: #565959; text-decoration: line-through; font-size: 0.9rem; margin-left: 8px; }
-        .btn { background: var(--amz-orange); color: black; text-align: center; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; border-bottom: 2px solid #e68a00; }
+        
+        /* TARJETAS MEJORADAS */
+        .card { background: white; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid #ddd; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .img-container { position: relative; padding: 20px; height: 200px; display: flex; align-items: center; justify-content: center; }
+        .card img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .badge { position: absolute; top: 10px; right: 10px; background: var(--discount); color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; }
+        
+        .info { padding: 20px; flex-grow: 1; text-align: left; }
+        .info h3 { font-size: 1.05rem; margin: 0 0 10px; color: #111; height: 2.8rem; overflow: hidden; }
+        .price-now { color: #B12704; font-size: 1.5rem; font-weight: bold; }
+        .price-old { color: #565959; text-decoration: line-through; font-size: 0.85rem; margin-left: 10px; }
+        
+        .btn { background: var(--amz-orange); color: black; text-align: center; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; display: block; margin-top: 15px; }
         .btn:hover { background: #f7df66; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>CholloTracker</h1>
-        <div id="status" class="update-tag">Actualizando precios...</div>
-    </header>
-    <div class="container" id="main"></div>
 
-    <script>
-        fetch('data.json?v=' + Date.now())
-            .then(r => r.json())
-            .then(data => {
-                document.getElementById('status').innerText = "Última sincronización: " + data.last_updated;
-                const main = document.getElementById('main');
-                const grouped = data.productos.reduce((acc, p) => {
-                    (acc[p.categoria] = acc[p.categoria] || []).push(p);
-                    return acc;
-                }, {});
+<header>
+    <h1>CholloTracker</h1>
+    <div id="status" style="font-size: 0.8rem; opacity: 0.8;">Sincronizando...</div>
+</header>
 
-                for (const cat in grouped) {
-                    const sec = document.createElement('div');
-                    sec.innerHTML = `<h2 class="category-title">${cat}</h2><div class="grid" id="grid-${cat}"></div>`;
-                    main.appendChild(sec);
-                    const grid = document.getElementById(`grid-${cat}`);
-                    grouped[cat].forEach(p => {
-                        grid.innerHTML += `
-                            <div class="card">
-                                <div class="img-container">
-                                    <div class="badge">-${p.ahorro_porcentaje}%</div>
-                                    <img src="${p.imagen}" alt="${p.nombre}">
-                                </div>
-                                <div class="info">
-                                    <h3>${p.nombre}</h3>
-                                    <div class="price-box">
-                                        <span class="price-now">${p.precio_amazon}€</span>
-                                        <span class="price-old">${p.precio_competencia}€</span>
-                                    </div>
-                                    <a href="${p.url_afiliado}" target="_blank" class="btn">Ver Chollo en Amazon</a>
-                                </div>
+<div class="container">
+    <div class="disclaimer">
+        <strong>Aviso:</strong> Como Afiliado de Amazon, percibo dinero con las compras elegibles. Los precios y la disponibilidad pueden variar. Al hacer clic en "Ver Chollo", serás redirigido a Amazon.es.
+    </div>
+
+    <div id="main"></div>
+</div>
+
+<script>
+    fetch('data.json?v=' + Date.now())
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('status').innerText = "Última actualización: " + data.last_updated;
+            const main = document.getElementById('main');
+            
+            const grouped = data.productos.reduce((acc, p) => {
+                (acc[p.categoria] = acc[p.categoria] || []).push(p);
+                return acc;
+            }, {});
+
+            for (const cat in grouped) {
+                const sec = document.createElement('div');
+                sec.innerHTML = `<h2 class="category-title">${cat}</h2><div class="grid" id="grid-${cat}"></div>`;
+                main.appendChild(sec);
+                const grid = document.getElementById(`grid-${cat}`);
+                grouped[cat].forEach(p => {
+                    grid.innerHTML += `
+                        <div class="card">
+                            <div class="img-container">
+                                <div class="badge">-${p.ahorro_porcentaje}%</div>
+                                <img src="${p.imagen}" alt="${p.nombre}">
                             </div>
-                        `;
-                    });
-                }
-            });
-    </script>
+                            <div class="info">
+                                <h3>${p.nombre}</h3>
+                                <div>
+                                    <span class="price-now">${p.precio_amazon}€</span>
+                                    <span class="price-old">${p.precio_competencia}€</span>
+                                </div>
+                                <a href="${p.url_afiliado}" target="_blank" class="btn">Ver Chollo en Amazon</a>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        });
+</script>
 </body>
 </html>
