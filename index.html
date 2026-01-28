@@ -33,30 +33,30 @@
     <p>Aviso: Los precios pueden variar. Como afiliado de Amazon, percibo dinero con las compras elegibles.</p>
 </footer>
 
+
 <script>
     fetch('data.json')
         .then(res => res.json())
         .then(data => {
-            document.getElementById('status').innerText = "Última actualización: " + data.last_updated;
-            const grid = document.getElementById('grid');
-            if(data.productos.length === 0) {
-                grid.innerHTML = "<h3>Hoy no hay diferencias de precio detectadas. ¡Vuelve pronto!</h3>";
-                return;
-            }
-            data.productos.forEach(p => {
-                grid.innerHTML += `
-                    <div class="card">
-                        <span class="badge">Ahorras ${p.ahorro_porcentaje}%</span>
-                        <img src="${p.imagen}" alt="Producto">
-                        <h3>${p.nombre}</h3>
-                        <p class="price-comp">En ${p.tienda_competencia}: ${p.precio_competencia}€</p>
-                        <p class="price-amz">Amazon: ${p.precio_amazon}€</p>
-                        <a href="${p.url_afiliado}" class="btn">Ver Chollo en Amazon</a>
-                    </div>
-                `;
+            const container = document.getElementById('productos');
+            // Agrupamos por categoría
+            const categorias = [...new Set(data.productos.map(p => p.categoria))];
+            
+            categorias.forEach(cat => {
+                const seccion = document.createElement('div');
+                seccion.innerHTML = `<h2>Sección: ${cat}</h2><div class="grid" id="cat-${cat}"></div>`;
+                container.appendChild(seccion);
+                
+                data.productos.filter(p => p.categoria === cat).forEach(p => {
+                    document.getElementById(`cat-${cat}`).innerHTML += `
+                        <div class="card">
+                            <img src="${p.imagen}">
+                            <h3>${p.nombre}</h3>
+                            <p class="price-amz">${p.precio_amazon}€</p>
+                            <a href="${p.url_afiliado}" class="btn">Comprar</a>
+                        </div>`;
+                });
             });
-        }).catch(() => {
-            document.getElementById('grid').innerHTML = "<h3>Esperando la primera carga de datos del robot...</h3>";
         });
 </script>
 </body>
