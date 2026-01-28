@@ -7,7 +7,7 @@ from datetime import datetime
 PRODUCTOS = [
     {"asin": "B08H75RTZ8", "nombre": "PS5 Spiderman", "cat": "Gaming", "comp": 549},
     {"asin": "B09G96TFFG", "nombre": "iPhone 13", "cat": "Electrónica", "comp": 720},
-    {"asin": "B07PMLGP77", "nombre": "Cápsulas Café", "cat": "Comida", "comp": 32}
+    {"asin": "B07PMLGP77", "nombre": "Cápsulas Café", "cat": "Comida", "comp": 32},
 ]
 
 ID_AFILIADO = "chukufluku01-21"
