@@ -2,71 +2,72 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title>CholloTracker Pro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CholloTracker - Ofertas en Tiempo Real</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; text-align: center; }
-        header { background: #232f3e; color: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .card img { max-width: 100%; height: 150px; object-fit: contain; }
-        .precio-amz { color: #B12704; font-size: 22px; font-weight: bold; }
-        .btn { display: block; background: #ffd814; color: black; padding: 10px; text-decoration: none; border-radius: 20px; font-weight: bold; margin-top: 10px; }
-        h2 { border-bottom: 2px solid #232f3e; padding-bottom: 10px; margin-top: 40px; color: #232f3e; }
+        :root { --amazon-dark: #232f3e; --amazon-orange: #ff9900; --bg: #f3f3f3; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; }
+        header { background: var(--amazon-dark); color: white; padding: 1.5rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        .category-title { border-left: 5px solid var(--amazon-orange); padding-left: 15px; margin: 40px 0 20px; color: var(--amazon-dark); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 12px; overflow: hidden; transition: 0.3s; position: relative; border: 1px solid #ddd; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .badge { position: absolute; top: 10px; right: 10px; background: #cc0c39; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; }
+        .card img { width: 100%; height: 200px; object-fit: contain; padding: 15px; box-sizing: border-box; background: #fff; }
+        .info { padding: 15px; flex-grow: 1; }
+        .info h3 { font-size: 1.1rem; margin: 0 0 10px; color: #333; height: 3rem; overflow: hidden; }
+        .price-row { display: flex; align-items: baseline; gap: 10px; }
+        .now { color: #B12704; font-size: 1.5rem; font-weight: bold; }
+        .old { color: #767676; text-decoration: line-through; font-size: 0.9rem; }
+        .btn { display: block; background: var(--amazon-orange); color: black; text-align: center; padding: 12px; text-decoration: none; font-weight: bold; margin-top: 15px; border-radius: 8px; transition: 0.2s; }
+        .btn:hover { background: #e68a00; }
+        #status { font-size: 0.9rem; opacity: 0.8; }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>CholloTracker</h1>
-        <p id="status">Cargando ofertas desde el almacén...</p>
+        <h1>CholloTracker Pro</h1>
+        <div id="status">Actualizando ofertas...</div>
     </header>
-
-    <div id="contenedor-principal"></div>
+    <div class="container" id="main-content"></div>
 
     <script>
-        // Forzamos a que no use la memoria caché añadiendo un número aleatorio al final
-        fetch('data.json?v=' + Math.random())
-            .then(response => {
-                if (!response.ok) throw new Error("No se pudo cargar el archivo data.json");
-                return response.json();
-            })
+        fetch('data.json?v=' + Date.now())
+            .then(res => res.json())
             .then(data => {
-                const main = document.getElementById('contenedor-principal');
-                const status = document.getElementById('status');
+                document.getElementById('status').innerText = "Última actualización: " + data.last_updated;
+                const main = document.getElementById('main-content');
                 
-                if (!data.productos || data.productos.length === 0) {
-                    status.innerText = "No hay ofertas disponibles ahora mismo.";
-                    return;
-                }
+                // Agrupar productos por categoría
+                const grouped = data.productos.reduce((acc, p) => {
+                    (acc[p.categoria] = acc[p.categoria] || []).push(p);
+                    return acc;
+                }, {});
 
-                status.innerText = "Última actualización: " + data.last_updated;
-
-                // Agrupar por categoría
-                const categorias = [...new Set(data.productos.map(p => p.categoria))];
-
-                categorias.forEach(cat => {
-                    const seccion = document.createElement('div');
-                    seccion.innerHTML = `<h2>${cat}</h2><div class="grid" id="cat-${cat}"></div>`;
-                    main.appendChild(seccion);
-
-                    const grid = document.getElementById(`cat-${cat}`);
-                    data.productos.filter(p => p.categoria === cat).forEach(p => {
+                for (const cat in grouped) {
+                    const section = document.createElement('section');
+                    section.innerHTML = `<h2 class="category-title">${cat}</h2><div class="grid" id="grid-${cat}"></div>`;
+                    main.appendChild(section);
+                    
+                    const grid = document.getElementById(`grid-${cat}`);
+                    grouped[cat].forEach(p => {
                         grid.innerHTML += `
                             <div class="card">
-                                <img src="${p.imagen}" alt="${p.nombre}">
-                                <h3>${p.nombre}</h3>
-                                <p style="text-decoration: line-through; color: gray;">Antes: ${p.precio_competencia}€</p>
-                                <p class="precio-amz">Hoy: ${p.precio_amazon}€</p>
-                                <a href="${p.url_afiliado}" target="_blank" class="btn">¡Ver Chollo!</a>
+                                <div class="badge">Ahorro: ${p.ahorro}</div>
+                                <img src="${p.img}" alt="${p.nombre}">
+                                <div class="info">
+                                    <h3>${p.nombre}</h3>
+                                    <div class="price-row">
+                                        <span class="now">${p.precio_amazon}</span>
+                                        <span class="old">${p.precio_competencia}</span>
+                                    </div>
+                                    <a href="${p.url}" target="_blank" class="btn">Ver en Amazon</a>
+                                </div>
                             </div>
                         `;
                     });
-                });
-            })
-            .catch(err => {
-                document.getElementById('status').innerText = "Error: " + err.message;
-                console.error(err);
+                }
             });
     </script>
 </body>
