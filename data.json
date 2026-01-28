@@ -1,32 +1,4 @@
 {
-    "last_updated": "2026-01-28 12:00",
-    "productos": [
-        {
-            "nombre": "PS5 Spiderman",
-            "categoria": "Gaming",
-            "precio_amazon": 499.0,
-            "precio_competencia": 999.0,
-            "ahorro_porcentaje": 50,
-            "url_afiliado": "https://www.amazon.es/dp/B0CKC33GD2/ref=cm_sw_r_as_gl_apa_gl_i_YQCYJA8420YNPKJJ6FX8",
-            "imagen": "https://m.media-amazon.com/images/I/81S9pS93B5L._AC_SL1500_.jpg"
-        },
-        {
-            "nombre": "iPhone 13",
-            "categoria": "Electronica",
-            "precio_amazon": 620.0,
-            "precio_competencia": 999.0,
-            "ahorro_porcentaje": 38,
-            "url_afiliado": "https://www.amazon.es/dp/B09G96TFFG/?tag=chukufluku01-21",
-            "imagen": "https://m.media-amazon.com/images/I/61l9ppRIiqL._AC_SL1500_.jpg"
-        },
-        {
-            "nombre": "Capsulas Cafe",
-            "categoria": "Comida",
-            "precio_amazon": 28.0,
-            "precio_competencia": 99.0,
-            "ahorro_porcentaje": 71,
-            "url_afiliado": "https://www.amazon.es/dp/B07PMLGP77/?tag=chukufluku01-21",
-            "imagen": "https://m.media-amazon.com/images/I/81E6O+5p0XL._AC_SL1500_.jpg"
-        }
-    ]
+    "last_updated": "2026-01-28 11:42",
+    "productos": []
 }
