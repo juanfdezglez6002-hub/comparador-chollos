@@ -2,62 +2,72 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CholloTracker - Amazon vs Competencia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CholloTracker - Ofertas en Tiempo Real</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f3f3f3; margin: 0; }
-        header { background-color: #232f3e; color: white; padding: 1.5rem; text-align: center; shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-        .card { background: white; border-radius: 10px; padding: 1.5rem; border: 1px solid #ddd; text-align: center; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .card img { max-width: 100%; height: 200px; object-fit: contain; }
-        .badge { background: #e67e22; color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; }
-        .price-amz { color: #B12704; font-size: 1.5rem; font-weight: bold; margin: 10px 0; }
-        .price-comp { color: #565959; text-decoration: line-through; font-size: 0.9rem; }
-        .btn { display: block; background: #ffd814; color: black; text-decoration: none; padding: 12px; border-radius: 25px; font-weight: bold; margin-top: 1rem; border: 1px solid #fcd200; }
-        footer { background: white; padding: 2rem; text-align: center; border-top: 1px solid #ddd; margin-top: 4rem; color: #666; font-size: 0.8rem; }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; text-align: center; }
+        header { background: #232f3e; color: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .card img { max-width: 100%; height: 150px; object-fit: contain; }
+        .precio-amz { color: #B12704; font-size: 22px; font-weight: bold; }
+        .btn { display: block; background: #ffd814; color: black; padding: 10px; text-decoration: none; border-radius: 20px; font-weight: bold; margin-top: 10px; }
+        h2 { border-bottom: 2px solid #232f3e; padding-bottom: 10px; margin-top: 40px; color: #232f3e; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>CholloTracker</h1>
-    <p id="status">Buscando las mejores ofertas...</p>
-</header>
+    <header>
+        <h1>CholloTracker</h1>
+        <p id="status">Cargando ofertas desde el almacén...</p>
+    </header>
 
-<div class="container">
-    <div id="grid" class="grid"></div>
-</div>
+    <div id="contenedor-principal"></div>
 
-<footer>
-    <p>*Aviso* : Los precios pueden variar. Como afiliado de Amazon, percibo dinero con las compras elegibles.</p>
-</footer>
-
-
-<script>
-    fetch('data.json')
-        .then(res => res.json())
-        .then(data => {
-            const container = document.getElementById('productos');
-            // Agrupamos por categoría
-            const categorias = [...new Set(data.productos.map(p => p.categoria))];
-            
-            categorias.forEach(cat => {
-                const seccion = document.createElement('div');
-                seccion.innerHTML = `<h2>Sección: ${cat}</h2><div class="grid" id="cat-${cat}"></div>`;
-                container.appendChild(seccion);
+    <script>
+        // Forzamos a que no use la memoria caché añadiendo un número aleatorio al final
+        fetch('data.json?v=' + Math.random())
+            .then(response => {
+                if (!response.ok) throw new Error("No se pudo cargar el archivo data.json");
+                return response.json();
+            })
+            .then(data => {
+                const main = document.getElementById('contenedor-principal');
+                const status = document.getElementById('status');
                 
-                data.productos.filter(p => p.categoria === cat).forEach(p => {
-                    document.getElementById(`cat-${cat}`).innerHTML += `
-                        <div class="card">
-                            <img src="${p.imagen}">
-                            <h3>${p.nombre}</h3>
-                            <p class="price-amz">${p.precio_amazon}€</p>
-                            <a href="${p.url_afiliado}" class="btn">Comprar</a>
-                        </div>`;
+                if (!data.productos || data.productos.length === 0) {
+                    status.innerText = "No hay ofertas disponibles ahora mismo.";
+                    return;
+                }
+
+                status.innerText = "Última actualización: " + data.last_updated;
+
+                // Agrupar por categoría
+                const categorias = [...new Set(data.productos.map(p => p.categoria))];
+
+                categorias.forEach(cat => {
+                    const seccion = document.createElement('div');
+                    seccion.innerHTML = `<h2>${cat}</h2><div class="grid" id="cat-${cat}"></div>`;
+                    main.appendChild(seccion);
+
+                    const grid = document.getElementById(`cat-${cat}`);
+                    data.productos.filter(p => p.categoria === cat).forEach(p => {
+                        grid.innerHTML += `
+                            <div class="card">
+                                <img src="${p.imagen}" alt="${p.nombre}">
+                                <h3>${p.nombre}</h3>
+                                <p style="text-decoration: line-through; color: gray;">Antes: ${p.precio_competencia}€</p>
+                                <p class="precio-amz">Hoy: ${p.precio_amazon}€</p>
+                                <a href="${p.url_afiliado}" target="_blank" class="btn">¡Ver Chollo!</a>
+                            </div>
+                        `;
+                    });
                 });
+            })
+            .catch(err => {
+                document.getElementById('status').innerText = "Error: " + err.message;
+                console.error(err);
             });
-        });
-</script>
+    </script>
 </body>
 </html>
