@@ -1,5 +1,5 @@
 {
-    "last_updated": "29/01/2026 06:51",
+    "last_updated": "29/01/2026 07:27",
     "productos": [
         {
             "nombre": "Consola PlayStation 5",
@@ -20,13 +20,13 @@
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B09G96TFFG&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
         },
         {
-            "nombre": "Cápsulas Café L'Or x100",
+            "nombre": "Café con leche en cápsula Dolce Gusto (16 ud)",
             "categoria": "Comida",
-            "precio_amazon": 27.5,
-            "precio_competencia": 35.5,
-            "ahorro_porcentaje": 22,
-            "url_afiliado": "https://www.amazon.es/dp/B07PMLGP77/?tag=chukufluku01-21",
-            "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B07PMLGP77&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
+            "precio_amazon": 3.95,
+            "precio_competencia": 4.79,
+            "ahorro_porcentaje": 17,
+            "url_afiliado": "https://www.amazon.es/dp/B0071Z164V6/?tag=chukufluku01-21",
+            "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0071Z164V6&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
         }
     ]
 }
