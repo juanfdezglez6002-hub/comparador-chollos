@@ -19,11 +19,11 @@ PRODUCTOS = [
         "precio_comp": 729.00
     },
     {
-        "asin": "B07PMLGP77", 
-        "nombre": "Cápsulas Café L'Or x100", 
+        "asin": "B0071Z164V6", 
+        "nombre": "Café con leche en cápsula Dolce Gusto (16 ud)", 
         "cat": "Comida", 
-        "precio_real": 27.50, 
-        "precio_comp": 35.50
+        "precio_real": 3.95, 
+        "precio_comp": 4.79
     }
 ]
 
