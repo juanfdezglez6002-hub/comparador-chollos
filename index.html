@@ -187,74 +187,82 @@
 </div>
 
 <script>
+    // Variable global para guardar los productos una vez cargados
+    let allProducts = [];
+
     async function loadContent() {
         try {
             const response = await fetch('data.json?v=' + Date.now());
             const data = await response.json();
+            allProducts = data.productos;
             
-            const mainContent = document.getElementById('main-content');
             const nav = document.getElementById('cat-nav');
 
-            mainContent.innerHTML = '';
+            // 1. Obtener categorías únicas
+            const categorias = [...new Set(allProducts.map(p => p.categoria || 'General'))].sort();
+
+            // 2. Crear botones de navegación
             nav.innerHTML = '';
-
-            const categoriasMap = data.productos.reduce((acc, producto) => {
-                const cat = producto.categoria || 'General';
-                if (!acc[cat]) acc[cat] = [];
-                acc[cat].push(producto);
-                return acc;
-            }, {});
-
-            const nombresCategorias = Object.keys(categoriasMap).sort();
-
-            nombresCategorias.forEach(nombreCat => {
-                const sectionId = "section-" + nombreCat.replace(/\s+/g, '-').toLowerCase();
-                nav.innerHTML += `<a href="#${sectionId}" class="nav-tag">${nombreCat}</a>`;
-
-                const section = document.createElement('section');
-                section.id = sectionId;
-                
-                let cardsHtml = '';
-                categoriasMap[nombreCat].forEach(p => {
-                    // AQUÍ ESTÁ EL CAMBIO: p.imagen (minúscula) debe coincidir con tu data.json
-                    cardsHtml += `
-                        <article class="card">
-                            <div class="img-box">
-                                <img src="${p.imagen}" alt="${p.nombre}" 
-                                     onerror="this.src='https://via.placeholder.com/200?text=Cargando...'" 
-                                     loading="lazy">
-                            </div>
-                            <div class="info">
-                                <h3>${p.nombre}</h3>
-                                <p class="resumen">${p.resumen || 'Excelente relación calidad-precio.'}</p>
-                                <div class="price">${p.precio}</div>
-                                <a href="${p.url}" class="btn" target="_blank">Ver en Amazon</a>
-                            </div>
-                        </article>
-                    `;
-                });
-
-                section.innerHTML = `
-                    <div class="category-header">
-                        <h2>${nombreCat}</h2>
-                    </div>
-                    <div class="grid">
-                        ${cardsHtml}
-                    </div>
-                `;
-                
-                mainContent.appendChild(section);
+            // Botón para ver "Todos" por si el usuario quiere volver atrás
+            nav.innerHTML += `<a href="#" class="nav-tag" onclick="renderCategory('Todos')">Todos</a>`;
+            
+            categorias.forEach(cat => {
+                nav.innerHTML += `<a href="#" class="nav-tag" onclick="renderCategory('${cat}')">${cat}</a>`;
             });
 
+            // 3. Renderizar todo al principio
+            renderCategory('Todos');
+
         } catch (error) {
-            console.error("Error al cargar el contenido:", error);
-            document.getElementById('main-content').innerHTML = `
-                <div id="loading-msg">
-                    <p>No se han podido cargar los productos.</p>
-                </div>
-            `;
+            console.error("Error cargando productos:", error);
+            document.getElementById('main-content').innerHTML = '<div id="loading-msg">Error al cargar productos.</div>';
         }
     }
+
+    function renderCategory(category) {
+        const mainContent = document.getElementById('main-content');
+        mainContent.innerHTML = ''; // Limpiamos la pantalla
+
+        // Filtrar productos
+        const filtered = (category === 'Todos') 
+            ? allProducts 
+            : allProducts.filter(p => p.categoria === category);
+
+        // Crear la estructura de la sección
+        const section = document.createElement('section');
+        
+        let cardsHtml = '';
+        filtered.forEach(p => {
+            cardsHtml += `
+                <article class="card">
+                    <div class="img-box">
+                        <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/200?text=Cargando...'" loading="lazy">
+                    </div>
+                    <div class="info">
+                        <h3>${p.nombre}</h3>
+                        <p class="resumen">${p.resumen}</p>
+                        <div class="price">${p.precio}</div>
+                        <a href="${p.url}" class="btn" target="_blank">Ver en Amazon</a>
+                    </div>
+                </article>
+            `;
+        });
+
+        section.innerHTML = `
+            <div class="category-header">
+                <h2>${category === 'Todos' ? 'Todas las Ofertas' : category}</h2>
+            </div>
+            <div class="grid">
+                ${cardsHtml}
+            </div>
+        `;
+        
+        mainContent.appendChild(section);
+        
+        // Hacer scroll hacia arriba suave al cambiar de pestaña
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
     loadContent();
 </script>
 
