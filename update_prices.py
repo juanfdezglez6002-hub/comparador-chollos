@@ -30,13 +30,12 @@ def generar_data_json():
     resultados = []
     
     for p in PRODUCTOS:
-        # Aquí es donde estaba el fallo: usamos p["cat"] para llenar "categoria"
-        # Y generamos la imagen legal de Amazon
+        # Usamos .get() por seguridad y p["precio_real"] que es como lo tienes arriba
         resultados.append({
-            "nombre": p["nombre"],
-            "categoria": p.get("cat", "General"), # Esto arregla el KeyError
-            "precio": p["precio"],
-            "resumen": p["resumen"],
+            "nombre": p.get("nombre", "Producto sin nombre"),
+            "categoria": p.get("cat", "General"),
+            "precio": str(p.get("precio_real", "Consultar")), # Usamos precio_real
+            "resumen": p.get("resumen", "Recomendado por su calidad-precio."),
             "url": f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}",
             "imagen": f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
         })
@@ -52,5 +51,6 @@ def generar_data_json():
     
     print(f"✅ JSON actualizado con {len(resultados)} productos.")
 
+# ESTO DEBE IR FUERA DE LA FUNCIÓN (SIN ESPACIOS AL PRINCIPIO)
 if __name__ == "__main__":
     generar_data_json()
