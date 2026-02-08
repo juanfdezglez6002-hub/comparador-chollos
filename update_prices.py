@@ -18,6 +18,13 @@ PRODUCTOS = [
         "precio_real": 619.00, 
         "precio_comp": 729.00
     },
+        {
+        "asin": "B09G96TFFG", 
+        "nombre": "Desodorante en crema para hombre y mujer 125 ml (LANCASTER)", 
+        "cat": "Belleza", 
+        "precio_real": 7,08, 
+        "precio_comp": 
+    },
     {
         "asin": "B0071Z164V6", 
         "nombre": "Café con leche en cápsula Dolce Gusto (16 ud)", 
