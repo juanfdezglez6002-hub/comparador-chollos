@@ -1,62 +1,45 @@
 import json
-from datetime import datetime
 
-# --- CONFIGURACIÓN MANUAL DE PRODUCTOS ---
-# Aquí controlas tú el 100% de la información
+# LISTA DE PRODUCTOS (Solo lo que quieres que se vea)
 PRODUCTOS = [
     {
-        "asin": "B08H75RTZ8", 
-        "nombre": "Consola PlayStation 5", 
-        "cat": "Gaming", 
-        "precio_real": 494.99, # Pon aquí el precio que ves en Amazon hoy
-        "precio_comp": 549.99  # Pon aquí el precio anterior/competencia
+        "asin": "B0071Z164V",
+        "nombre": "Coca-Cola Zero Azúcar (Pack 12)",
+        "cat": "Alimentación",
+        "precio": "10,80€",
+        "resumen": "La opción sin cafeína perfecta para casa."
     },
     {
-        "asin": "B09G96TFFG", 
-        "nombre": "Apple iPhone 13 (128 GB)", 
-        "cat": "Electrónica", 
-        "precio_real": 619.00, 
-        "precio_comp": 729.00
-    },
-        {
-        "asin": "B09G96TFFG", 
-        "nombre": "Desodorante en crema para hombre y mujer 125 ml (LANCASTER)", 
-        "cat": "Belleza", 
-        "precio_real": 7.08, 
-        "precio_comp": 
-    },
-    {
-        "asin": "B0071Z164V6", 
-        "nombre": "Café con leche en cápsula Dolce Gusto (16 ud)", 
-        "cat": "Comida", 
-        "precio_real": 3.95, 
-        "precio_comp": 4.79
+        "asin": "B08H7SRTZ8",
+        "nombre": "Console PlayStation 5 Slim",
+        "cat": "Gaming",
+        "precio": "499,00€",
+        "resumen": "La versión más compacta con lector de discos."
     }
 ]
 
-ID_AFILIADO = "chukufluku01-21"
+ID_AFILIADO = "tu-tag-21"
 
-resultados = []
-for p in PRODUCTOS:
-    # Cálculo matemático exacto del ahorro
-    ahorro = int((1 - (p['precio_real'] / p['precio_comp'])) * 100)
+def build():
+    lista_final = []
+    for p in PRODUCTOS:
+        lista_final.append({
+            "nombre": p["nombre"],
+            "categoria": p["cat"],
+            "precio": p["precio"],
+            "resumen": p["resumen"],
+            "url": f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}",
+            "imagen": f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
+        })
+    
+    data = {
+        "last_updated": "Hoy",
+        "categorias": sorted(list(set(p["cat"] for p in PRODUCTOS))),
+        "productos": lista_final
+    }
+    
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
 
-    resultados.append({
-        "nombre": p['nombre'],
-        "categoria": p['cat'],
-        "precio_amazon": p['precio_real'],
-        "precio_competencia": p['precio_comp'],
-        "ahorro_porcentaje": ahorro,
-        "url_afiliado": f"https://www.amazon.es/dp/{p['asin']}/?tag={ID_AFILIADO}",
-        # Imagen legal de Amazon (Explicación abajo)
-        "imagen": f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
-    })
-
-# Generar el JSON
-with open('data.json', 'w', encoding='utf-8') as f:
-    json.dump({
-        "last_updated": datetime.now().strftime("%d/%m/%Y %H:%M"),
-        "productos": resultados
-    }, f, ensure_ascii=False, indent=4)
-
-print("¡JSON actualizado manualmente con éxito!")
+if __name__ == "__main__":
+    build()
