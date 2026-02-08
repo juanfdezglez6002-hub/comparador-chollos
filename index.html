@@ -65,32 +65,55 @@
     <div class="grid" id="product-grid"></div>
 </div>
 
-<script>
-    async function load() {
-        const res = await fetch('data.json');
-        const data = await res.json();
-        const grid = document.getElementById('product-grid');
+async function load() {
+    try {
+        const res = await fetch('data.json?v=' + Date.now());
+        const categorias = await res.json();
+        const mainContent = document.getElementById('main-content');
         const nav = document.getElementById('cat-nav');
 
-        data.categorias.forEach(c => {
-            nav.innerHTML += `<a href="#${c}" class="nav-tag">${c}</a>`;
-        });
+        // Limpiar contenido previo
+        mainContent.innerHTML = '';
+        nav.innerHTML = '';
 
-        data.productos.forEach(p => {
-            grid.innerHTML += `
-                <div class="card">
-                    <div class="img-box"><img src="${p.imagen}" alt="${p.nombre}"></div>
-                    <div class="info">
-                        <h3>${p.nombre}</h3>
-                        <p class="resumen">${p.resumen}</p>
-                        <div class="price">${p.precio}</div>
-                        <a href="${p.url}" class="btn" target="_blank">Ver en Amazon</a>
-                    </div>
+        // Recorrer cada categoría en el JSON
+        for (const [nombreCat, productos] of Object.entries(categorias)) {
+            
+            // 1. Crear enlace en la navegación superior
+            nav.innerHTML += `<a href="#section-${nombreCat}" class="nav-tag">${nombreCat}</a>`;
+
+            // 2. Crear la sección visual
+            const section = document.createElement('section');
+            section.id = `section-${nombreCat}`;
+            section.innerHTML = `
+                <div class="category-header" style="margin: 40px 0 20px;">
+                    <h2 style="background: #232f3e; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block;">${nombreCat}</h2>
                 </div>
+                <div class="grid" id="grid-${nombreCat}"></div>
             `;
-        });
+            mainContent.appendChild(section);
+
+            // 3. Llenar el grid de esa sección con sus productos
+            const grid = document.getElementById(`grid-${nombreCat}`);
+            productos.forEach(p => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <div class="img-box"><img src="${p.imagen}" alt="${p.nombre}"></div>
+                        <div class="info">
+                            <h3>${p.nombre}</h3>
+                            <p class="resumen">${p.resumen}</p>
+                            <div class="price">${p.precio}</div>
+                            <a href="${p.url}" class="btn" target="_blank">Ver en Amazon</a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    } catch (e) {
+        console.error("Error cargando productos:", e);
+        document.getElementById('main-content').innerHTML = "Error al cargar los productos.";
     }
-    load();
-</script>
+}
+load();
 </body>
 </html>
