@@ -1,5 +1,5 @@
 {
-    "last_updated": "08/02/2026 17:49",
+    "last_updated": "08/02/2026 18:17",
     "productos": [
         {
             "nombre": "Coca-Cola Zero Azúcar (Pack 12)",
@@ -58,12 +58,12 @@
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08W9N669L&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
         },
         {
-            "nombre": "Sérum Facial con Vitamina C",
+            "nombre": "Desodorante en crema LANCASTER",
             "categoria": "Belleza",
-            "precio": "12,50€",
+            "precio": "7,08€",
             "resumen": "Piel radiante y protegida diariamente.",
-            "url": "https://www.amazon.es/dp/B007W0G8G2?tag=chukukfuku01-21",
-            "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B007W0G8G2&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
+            "url": "https://www.amazon.es/dp/B06Y5P4Z5M?tag=chukukfuku01-21",
+            "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B06Y5P4Z5M&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
         },
         {
             "nombre": "Sudadera Levi's con Capucha",
