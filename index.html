@@ -3,134 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CholloTracker | Recomendaciones</title>
+    <title>CholloTracker | Recomendaciones de Expertos</title>
     <style>
         :root {
             --primary: #FF9900;
             --dark: #131921;
             --gray: #F0F2F2;
+            --white: #ffffff;
         }
 
-        body { font-family: 'Segoe UI', sans-serif; background: var(--gray); margin: 0; color: var(--dark); }
+        body { 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            background: var(--gray); 
+            margin: 0; 
+            color: var(--dark);
+            scroll-behavior: smooth;
+        }
 
-        header { background: var(--dark); color: white; padding: 40px 20px; text-align: center; }
-        header h1 { margin: 0; font-size: 2.5rem; }
+        /* HEADER */
+        header { 
+            background: var(--dark); 
+            color: white; 
+            padding: 50px 20px; 
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2.8rem; letter-spacing: -1px; }
+        header p { opacity: 0.8; font-size: 1.1rem; margin-top: 10px; }
 
+        /* NAVEGACIÓN DE CATEGORÍAS */
         .nav-categories {
-            display: flex; justify-content: center; gap: 10px; padding: 15px;
-            background: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex; 
+            justify-content: center; 
+            gap: 12px; 
+            padding: 15px;
+            background: var(--white); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
         }
         .nav-tag {
-            padding: 8px 15px; background: var(--gray); border-radius: 5px;
-            text-decoration: none; color: var(--dark); font-weight: bold; font-size: 0.9rem;
+            padding: 10px 20px; 
+            background: var(--gray); 
+            border-radius: 25px;
+            text-decoration: none; 
+            color: var(--dark); 
+            font-weight: bold; 
+            font-size: 0.85rem;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .nav-tag:hover {
+            background: var(--primary);
+            transform: scale(1.05);
         }
 
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        
-        /* Estilos del Grid */
+        /* CONTENEDOR PRINCIPAL */
+        .container { 
+            max-width: 1250px; 
+            margin: 20px auto; 
+            padding: 0 20px 100px; 
+        }
+
+        /* TÍTULOS DE SECCIÓN */
+        .category-header {
+            margin: 50px 0 25px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .category-header h2 { 
+            background: var(--dark); 
+            color: white; 
+            padding: 8px 25px; 
+            border-radius: 50px; 
+            display: inline-block;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        /* GRID DE PRODUCTOS */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
             gap: 25px; 
-            margin-bottom: 50px;
         }
 
+        /* TARJETA DE PRODUCTO */
         .card {
-            background: white; border-radius: 10px; overflow: hidden;
-            display: flex; flex-direction: column; transition: 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: var(--white); 
+            border-radius: 12px; 
+            overflow: hidden;
+            display: flex; 
+            flex-direction: column; 
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+        }
 
-        .img-box { height: 220px; padding: 15px; display: flex; align-items: center; justify-content: center; }
-        .img-box img { max-height: 100%; max-width: 100%; object-fit: contain; }
+        .img-box { 
+            height: 240px; 
+            padding: 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            background: #fff;
+        }
+        .img-box img { 
+            max-height: 100%; 
+            max-width: 100%; 
+            object-fit: contain; 
+        }
 
-        .info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .info h3 { font-size: 1rem; margin: 0 0 8px; height: 40px; overflow: hidden; }
-        .resumen { font-size: 0.85rem; color: #555; margin-bottom: 15px; }
-        .price { font-size: 1.6rem; font-weight: 800; margin-bottom: 15px; color: #B12704; }
-
-        .btn {
-            background: var(--primary); color: var(--dark); text-align: center;
-            padding: 12px; text-decoration: none; font-weight: bold; border-radius: 5px;
+        .info { 
+            padding: 20px; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            border-top: 1px solid #f0f0f0;
+        }
+        .info h3 { 
+            font-size: 1.05rem; 
+            margin: 0 0 10px; 
+            height: 42px; 
+            overflow: hidden; 
+            line-height: 1.3;
+        }
+        .resumen { 
+            font-size: 0.9rem; 
+            color: #666; 
+            margin-bottom: 15px; 
+            line-height: 1.4;
+            flex-grow: 1;
         }
         
-        h2 { background: #232f3e; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; }
+        .price { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            color: var(--dark);
+        }
+
+        .btn {
+            background: var(--primary); 
+            color: var(--dark); 
+            text-align: center;
+            padding: 14px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            filter: brightness(1.05);
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+        }
+
+        /* FOOTER O MENSAJE VACÍO */
+        #loading-msg {
+            text-align: center;
+            padding: 100px;
+            font-size: 1.2rem;
+            color: #888;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Mis Recomendaciones</h1>
-    <p>Selección manual de productos calidad-precio</p>
+    <h1>CholloTracker Pro</h1>
+    <p>Selección manual de los mejores productos en Amazon España</p>
 </header>
 
-<div class="nav-categories" id="cat-nav"></div>
+<nav class="nav-categories" id="cat-nav"></nav>
 
 <div class="container" id="main-content">
-    </div>
+    <div id="loading-msg">Cargando las mejores recomendaciones del día...</div>
+</div>
 
 <script>
-    async function load() {
+    async function loadContent() {
         try {
-            // Añadimos timestamp para evitar que el navegador use una versión vieja del JSON
-            const res = await fetch('data.json?v=' + Date.now());
-            const data = await res.json();
+            // Fetch con timestamp para evitar caché
+            const response = await fetch('data.json?v=' + Date.now());
+            const data = await response.json();
+            
             const mainContent = document.getElementById('main-content');
             const nav = document.getElementById('cat-nav');
 
+            // Limpiamos el mensaje de carga
             mainContent.innerHTML = '';
             nav.innerHTML = '';
 
-            // Si tu JSON tiene la estructura antigua (lista plana), la agrupamos aquí:
-            const productos = data.productos || [];
-            const categoriasAgrupadas = productos.reduce((acc, p) => {
-                const cat = p.categoria || 'General';
+            // 1. Agrupar productos por categoría
+            // Esto permite que el JSON pueda venir en cualquier orden
+            const categoriasMap = data.productos.reduce((acc, producto) => {
+                const cat = producto.categoria || 'General';
                 if (!acc[cat]) acc[cat] = [];
-                acc[cat].push(p);
+                acc[cat].push(producto);
                 return acc;
             }, {});
 
-            for (const [nombreCat, lista] of Object.entries(categoriasAgrupadas)) {
-                // Crear botón nav
-                nav.innerHTML += `<a href="#section-${nombreCat}" class="nav-tag">${nombreCat}</a>`;
+            // 2. Ordenar categorías alfabéticamente
+            const nombresCategorias = Object.keys(categoriasMap).sort();
 
-                // Crear sección
-                const section = document.createElement('section');
-                section.id = `section-${nombreCat}`;
+            // 3. Crear el HTML para cada categoría
+            nombresCategorias.forEach(nombreCat => {
                 
-                // Generar el HTML de las tarjetas
+                // ID limpio para los enlaces (quita espacios)
+                const sectionId = "section-" + nombreCat.replace(/\s+/g, '-').toLowerCase();
+
+                // Añadir botón al menú superior
+                nav.innerHTML += `<a href="#${sectionId}" class="nav-tag">${nombreCat}</a>`;
+
+                // Crear la sección y el grid
+                const section = document.createElement('section');
+                section.id = sectionId;
+                
                 let cardsHtml = '';
-                lista.forEach(p => {
-                    // Usamos || para que funcione con "precio" o "precio_amazon" según tu Python
-                    const precioMostrar = p.precio || p.precio_amazon + "€";
-                    const descResumen = p.resumen || "Producto recomendado por su calidad y precio.";
-                    
+                categoriasMap[nombreCat].forEach(p => {
                     cardsHtml += `
-                        <div class="card">
-                            <div class="img-box"><img src="${p.imagen}" alt="${p.nombre}"></div>
+                        <article class="card">
+                            <div class="img-box">
+                                <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
+                            </div>
                             <div class="info">
                                 <h3>${p.nombre}</h3>
-                                <p class="resumen">${descResumen}</p>
-                                <div class="price">${precioMostrar}</div>
-                                <a href="${p.url_afiliado || p.url}" class="btn" target="_blank">Ver en Amazon</a>
+                                <p class="resumen">${p.resumen || 'Excelente relación calidad-precio.'}</p>
+                                <div class="price">${p.precio}</div>
+                                <a href="${p.url}" class="btn" target="_blank">Ver en Amazon</a>
                             </div>
-                        </div>
+                        </article>
                     `;
                 });
 
                 section.innerHTML = `
-                    <div class="category-header"><h2>${nombreCat}</h2></div>
-                    <div class="grid">${cardsHtml}</div>
+                    <div class="category-header">
+                        <h2>${nombreCat}</h2>
+                    </div>
+                    <div class="grid">
+                        ${cardsHtml}
+                    </div>
                 `;
+                
                 mainContent.appendChild(section);
-            }
-        } catch (e) {
-            console.error("Error:", e);
-            document.getElementById('main-content').innerHTML = "<h3>Cargando recomendaciones...</h3><p>Si no aparecen, asegúrate de haber ejecutado update_prices.py</p>";
+            });
+
+        } catch (error) {
+            console.error("Error al cargar el contenido:", error);
+            document.getElementById('main-content').innerHTML = `
+                <div id="loading-msg">
+                    <p>No se han podido cargar los productos.</p>
+                    <small>Asegúrate de que 'data.json' existe y tiene el formato correcto.</small>
+                </div>
+            `;
         }
     }
-    load();
+
+    // Iniciar carga
+    loadContent();
 </script>
+
 </body>
 </html>
