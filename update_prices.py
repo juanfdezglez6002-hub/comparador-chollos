@@ -39,7 +39,7 @@ def generar_data_json():
         
         lista_final.append({
             "nombre": p["nombre"],
-            "categoria": p["cat"],
+            "categoria": p["categoria"],
             "precio": p["precio"],
             "resumen": p["resumen"],
             "url": url_final,
