@@ -5,23 +5,23 @@ from datetime import datetime
 # Aquí añades todo lo que quieras recomendar
 PRODUCTOS = [
     # ALIMENTACIÓN
-    {"asin": "B0071Z164V", "nombre": "Coca-Cola Zero Azúcar (Pack 12)", "cat": "Alimentación", "precio": "10,80€", "resumen": "Pack ahorro ideal para casa."},
+    {"asin": "B0071Z164V", "nombre": "Coca-Cola Zero Azúcar (Pack 12)", "cat": "Alimentación", "precio_manual": "10,80€", "resumen": "Pack ahorro ideal para casa."},
     # GAMING
-    {"asin": "B08H7SRTZ8", "nombre": "Consola PlayStation 5 Slim", "cat": "Gaming", "precio": "494,99€", "resumen": "La mejor experiencia de juego actual."},
+    {"asin": "B08H7SRTZ8", "nombre": "Consola PlayStation 5 Slim", "cat": "Gaming", "precio_manual": "494,99€", "resumen": "La mejor experiencia de juego actual."},
     # ELECTRÓNICA
-    {"asin": "B09G96TTFG", "nombre": "Apple iPhone 13 (128 GB)", "cat": "Electrónica", "precio": "619,00€", "resumen": "Potencia y cámara en un diseño icónico."},
+    {"asin": "B09G96TTFG", "nombre": "Apple iPhone 13 (128 GB)", "cat": "Electrónica", "precio_manual": "619,00€", "resumen": "Potencia y cámara en un diseño icónico."},
     # HOGAR
-    {"asin": "B08C1KN5CH", "nombre": "Freidora de Aire COSORI 5.5L", "cat": "Hogar", "precio": "109,00€", "resumen": "Cocina sano y rápido todos los días."},
+    {"asin": "B08C1KN5CH", "nombre": "Freidora de Aire COSORI 5.5L", "cat": "Hogar", "precio_manual": "109,00€", "resumen": "Cocina sano y rápido todos los días."},
     # LIBROS
-    {"asin": "8408270481", "nombre": "Hábitos Atómicos - James Clear", "cat": "Libros", "precio": "18,90€", "resumen": "El libro nº1 para cambiar tus rutinas."},
+    {"asin": "8408270481", "nombre": "Hábitos Atómicos - James Clear", "cat": "Libros", "precio_manual": "18,90€", "resumen": "El libro nº1 para cambiar tus rutinas."},
     # DEPORTE
-    {"asin": "B07P8929S3", "nombre": "Mancuernas Ajustables (Par)", "cat": "Deporte", "precio": "85,00€", "resumen": "Entrena en casa con equipo profesional."},
+    {"asin": "B07P8929S3", "nombre": "Mancuernas Ajustables (Par)", "cat": "Deporte", "precio_manual": "85,00€", "resumen": "Entrena en casa con equipo profesional."},
     # JUGUETES
-    {"asin": "B08W9N669L", "nombre": "LEGO Star Wars Halcón Milenario", "cat": "Juguetes", "precio": "145,00€", "resumen": "Pieza de coleccionista imprescindible."},
+    {"asin": "B08W9N669L", "nombre": "LEGO Star Wars Halcón Milenario", "cat": "Juguetes", "precio_manual": "145,00€", "resumen": "Pieza de coleccionista imprescindible."},
     # BELLEZA
-    {"asin": "B06Y5P4Z5M", "nombre": "Desodorante en crema LANCASTER", "cat": "Belleza", "precio": "7,08€", "resumen": "Piel radiante y protegida diariamente."},
+    {"asin": "B06Y5P4Z5M", "nombre": "Desodorante en crema LANCASTER", "cat": "Belleza", "precio_manual": "7,08€", "resumen": "Piel radiante y protegida diariamente."},
     # ROPA
-    {"asin": "B01N266I09", "nombre": "Sudadera Levi's con Capucha", "cat": "Ropa", "precio": "45,00€", "resumen": "Clásico cómodo que nunca pasa de moda."}
+    {"asin": "B01N266I09", "nombre": "Sudadera Levi's con Capucha", "cat": "Ropa", "precio_manual": "45,00€", "resumen": "Clásico cómodo que nunca pasa de moda."}
 ]
 
 ID_AFILIADO = "chukukfuku01-21"
