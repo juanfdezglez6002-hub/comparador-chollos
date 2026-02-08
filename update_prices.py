@@ -29,26 +29,27 @@ ID_AFILIADO = "chukukfuku01-21"
 def generar_data_json():
     resultados = []
     
-for p in PRODUCTOS:
-        # 1. Definimos la variable (esto es lo que faltaba y daba error)
+    for p in PRODUCTOS:
+        # 1. Definimos la variable limpia
         asin_limpio = str(p.get("asin", "")).strip()
         
-        # 2. Ahora sí la usamos para construir los datos
+        # 2. Construimos los datos para el HTML
         resultados.append({
             "nombre": p.get("nombre"),
             "categoria": p.get("cat"),
             "precio": p.get("precio_manual"),
             "resumen": p.get("resumen"),
             "url": f"https://www.amazon.es/dp/{asin_limpio}?tag={ID_AFILIADO}",
-            # Usamos el formato de imagen más compatible que existe:
             "imagen": f"https://images.amazon.com/images/P/{asin_limpio}.01._SL400_.jpg"
         })
     
+    # 3. Creamos el objeto final (AQUÍ ESTABA TU ERROR DE ESPACIOS)
     data = {
         "last_updated": datetime.now().strftime("%d/%m/%Y %H:%M"),
         "productos": resultados
     }
     
+    # 4. Escribimos el archivo
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
     
