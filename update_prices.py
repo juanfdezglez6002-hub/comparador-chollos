@@ -26,26 +26,36 @@ PRODUCTOS = [
 
 ID_AFILIADO = "chukukfuku01-21"
 
-def build():
-    resultados = []
+def generar_data_json():
+    lista_final = []
+    
     for p in PRODUCTOS:
-        resultados.append({
+        # CONSTRUCCIÓN DEL ENLACE DE IMAGEN LEGAL (MÉTODO 1)
+        # Este enlace llama a la imagen oficial de Amazon sin descargarla
+        url_imagen_amazon = f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
+        
+        # CONSTRUCCIÓN DEL ENLACE DE AFILIADO
+        url_final = f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}"
+        
+        lista_final.append({
             "nombre": p["nombre"],
             "categoria": p["cat"],
             "precio": p["precio"],
             "resumen": p["resumen"],
-            "url": f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}",
-            "imagen": f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
+            "url": url_final,
+            "imagen": url_imagen_amazon
         })
     
-    data = {
+    # 3. GUARDAR EL ARCHIVO JSON
+    data_estructurada = {
         "last_updated": datetime.now().strftime("%d/%m/%Y %H:%M"),
-        "productos": resultados
+        "productos": lista_final
     }
     
     with open('data.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
-    print("JSON generado con éxito.")
+        json.dump(data_estructurada, f, indent=4, ensure_ascii=False)
+    
+    print(f"✅ data.json generado con {len(lista_final)} productos.")
 
 if __name__ == "__main__":
-    build()
+    generar_data_json()
