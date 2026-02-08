@@ -27,35 +27,30 @@ PRODUCTOS = [
 ID_AFILIADO = "chukukfuku01-21"
 
 def generar_data_json():
-    lista_final = []
+    resultados = []
     
     for p in PRODUCTOS:
-        # CONSTRUCCIÓN DEL ENLACE DE IMAGEN LEGAL (MÉTODO 1)
-        # Este enlace llama a la imagen oficial de Amazon sin descargarla
-        url_imagen_amazon = f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
-        
-        # CONSTRUCCIÓN DEL ENLACE DE AFILIADO
-        url_final = f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}"
-        
-        lista_final.append({
+        # Aquí es donde estaba el fallo: usamos p["cat"] para llenar "categoria"
+        # Y generamos la imagen legal de Amazon
+        resultados.append({
             "nombre": p["nombre"],
-            "categoria": p["categoria"],
+            "categoria": p.get("cat", "General"), # Esto arregla el KeyError
             "precio": p["precio"],
             "resumen": p["resumen"],
-            "url": url_final,
-            "imagen": url_imagen_amazon
+            "url": f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}",
+            "imagen": f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
         })
     
-    # 3. GUARDAR EL ARCHIVO JSON
-    data_estructurada = {
+    # Generar el JSON final
+    data = {
         "last_updated": datetime.now().strftime("%d/%m/%Y %H:%M"),
-        "productos": lista_final
+        "productos": resultados
     }
     
     with open('data.json', 'w', encoding='utf-8') as f:
-        json.dump(data_estructurada, f, indent=4, ensure_ascii=False)
+        json.dump(data, f, indent=4, ensure_ascii=False)
     
-    print(f"✅ data.json generado con {len(lista_final)} productos.")
+    print(f"✅ JSON actualizado con {len(resultados)} productos.")
 
 if __name__ == "__main__":
     generar_data_json()
