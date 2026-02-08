@@ -37,7 +37,7 @@ def generar_data_json():
             "precio": p.get("precio_manual"), # Lee tu precio manual
             "resumen": p.get("resumen"),
             "url": f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}",
-            "imagen": f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
+            "imagen": f"https://images.amazon.com/images/P/{asin_limpio}.01._SL400_.jpg"
         })
     
     data = {
