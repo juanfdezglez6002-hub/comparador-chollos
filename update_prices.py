@@ -19,7 +19,7 @@ PRODUCTOS = [
     # JUGUETES
     {"asin": "B08W9N669L", "nombre": "LEGO Star Wars Halcón Milenario", "cat": "Juguetes", "precio": "145,00€", "resumen": "Pieza de coleccionista imprescindible."},
     # BELLEZA
-    {"asin": "B007W0G8G2", "nombre": "Sérum Facial con Vitamina C", "cat": "Belleza", "precio": "12,50€", "resumen": "Piel radiante y protegida diariamente."},
+    {"asin": "B06Y5P4Z5M", "nombre": "Desodorante en crema LANCASTER", "cat": "Belleza", "precio": "7,08€", "resumen": "Piel radiante y protegida diariamente."},
     # ROPA
     {"asin": "B01N266I09", "nombre": "Sudadera Levi's con Capucha", "cat": "Ropa", "precio": "45,00€", "resumen": "Clásico cómodo que nunca pasa de moda."}
 ]
