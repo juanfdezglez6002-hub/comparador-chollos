@@ -22,7 +22,7 @@ PRODUCTOS = [
         "asin": "B09G96TFFG", 
         "nombre": "Desodorante en crema para hombre y mujer 125 ml (LANCASTER)", 
         "cat": "Belleza", 
-        "precio_real": 7,08, 
+        "precio_real": 7.08, 
         "precio_comp": 
     },
     {
