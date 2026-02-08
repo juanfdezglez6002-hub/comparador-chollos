@@ -1,10 +1,10 @@
 {
-    "last_updated": "08/02/2026 19:41",
+    "last_updated": "08/02/2026 19:46",
     "productos": [
         {
             "nombre": "Coca-Cola Zero Azúcar (Pack 12)",
             "categoria": "Alimentación",
-            "precio": "10,80€",
+            "precio": "Consultar",
             "resumen": "Pack ahorro ideal para casa.",
             "url": "https://www.amazon.es/dp/B0071Z164V?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B0071Z164V&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
@@ -12,7 +12,7 @@
         {
             "nombre": "Consola PlayStation 5 Slim",
             "categoria": "Gaming",
-            "precio": "494,99€",
+            "precio": "Consultar",
             "resumen": "La mejor experiencia de juego actual.",
             "url": "https://www.amazon.es/dp/B08H7SRTZ8?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08H7SRTZ8&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
@@ -20,7 +20,7 @@
         {
             "nombre": "Apple iPhone 13 (128 GB)",
             "categoria": "Electrónica",
-            "precio": "619,00€",
+            "precio": "Consultar",
             "resumen": "Potencia y cámara en un diseño icónico.",
             "url": "https://www.amazon.es/dp/B09G96TTFG?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B09G96TTFG&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
@@ -28,7 +28,7 @@
         {
             "nombre": "Freidora de Aire COSORI 5.5L",
             "categoria": "Hogar",
-            "precio": "109,00€",
+            "precio": "Consultar",
             "resumen": "Cocina sano y rápido todos los días.",
             "url": "https://www.amazon.es/dp/B08C1KN5CH?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08C1KN5CH&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
@@ -36,7 +36,7 @@
         {
             "nombre": "Hábitos Atómicos - James Clear",
             "categoria": "Libros",
-            "precio": "18,90€",
+            "precio": "Consultar",
             "resumen": "El libro nº1 para cambiar tus rutinas.",
             "url": "https://www.amazon.es/dp/8408270481?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=8408270481&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
@@ -44,7 +44,7 @@
         {
             "nombre": "Mancuernas Ajustables (Par)",
             "categoria": "Deporte",
-            "precio": "85,00€",
+            "precio": "Consultar",
             "resumen": "Entrena en casa con equipo profesional.",
             "url": "https://www.amazon.es/dp/B07P8929S3?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B07P8929S3&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
@@ -52,7 +52,7 @@
         {
             "nombre": "LEGO Star Wars Halcón Milenario",
             "categoria": "Juguetes",
-            "precio": "145,00€",
+            "precio": "Consultar",
             "resumen": "Pieza de coleccionista imprescindible.",
             "url": "https://www.amazon.es/dp/B08W9N669L?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B08W9N669L&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
@@ -60,7 +60,7 @@
         {
             "nombre": "Desodorante en crema LANCASTER",
             "categoria": "Belleza",
-            "precio": "7,08€",
+            "precio": "Consultar",
             "resumen": "Piel radiante y protegida diariamente.",
             "url": "https://www.amazon.es/dp/B06Y5P4Z5M?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B06Y5P4Z5M&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
@@ -68,7 +68,7 @@
         {
             "nombre": "Sudadera Levi's con Capucha",
             "categoria": "Ropa",
-            "precio": "45,00€",
+            "precio": "Consultar",
             "resumen": "Clásico cómodo que nunca pasa de moda.",
             "url": "https://www.amazon.es/dp/B01N266I09?tag=chukukfuku01-21",
             "imagen": "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B01N266I09&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
