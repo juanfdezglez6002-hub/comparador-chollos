@@ -16,7 +16,6 @@
         header { background: var(--dark); color: white; padding: 40px 20px; text-align: center; }
         header h1 { margin: 0; font-size: 2.5rem; }
 
-        /* Navegación por categorías */
         .nav-categories {
             display: flex; justify-content: center; gap: 10px; padding: 15px;
             background: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -27,12 +26,19 @@
         }
 
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        
+        /* Estilos del Grid */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 50px;
+        }
 
-        /* Tarjeta Directa */
         .card {
             background: white; border-radius: 10px; overflow: hidden;
             display: flex; flex-direction: column; transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
@@ -42,14 +48,14 @@
         .info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         .info h3 { font-size: 1rem; margin: 0 0 8px; height: 40px; overflow: hidden; }
         .resumen { font-size: 0.85rem; color: #555; margin-bottom: 15px; }
-        
-        /* Precio Único */
-        .price { font-size: 1.6rem; font-weight: 800; margin-bottom: 15px; }
+        .price { font-size: 1.6rem; font-weight: 800; margin-bottom: 15px; color: #B12704; }
 
         .btn {
             background: var(--primary); color: var(--dark); text-align: center;
             padding: 12px; text-decoration: none; font-weight: bold; border-radius: 5px;
         }
+        
+        h2 { background: #232f3e; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; }
     </style>
 </head>
 <body>
@@ -61,59 +67,70 @@
 
 <div class="nav-categories" id="cat-nav"></div>
 
-<div class="container">
-    <div class="grid" id="product-grid"></div>
-</div>
+<div class="container" id="main-content">
+    </div>
 
-async function load() {
-    try {
-        const res = await fetch('data.json?v=' + Date.now());
-        const categorias = await res.json();
-        const mainContent = document.getElementById('main-content');
-        const nav = document.getElementById('cat-nav');
+<script>
+    async function load() {
+        try {
+            // Añadimos timestamp para evitar que el navegador use una versión vieja del JSON
+            const res = await fetch('data.json?v=' + Date.now());
+            const data = await res.json();
+            const mainContent = document.getElementById('main-content');
+            const nav = document.getElementById('cat-nav');
 
-        // Limpiar contenido previo
-        mainContent.innerHTML = '';
-        nav.innerHTML = '';
+            mainContent.innerHTML = '';
+            nav.innerHTML = '';
 
-        // Recorrer cada categoría en el JSON
-        for (const [nombreCat, productos] of Object.entries(categorias)) {
-            
-            // 1. Crear enlace en la navegación superior
-            nav.innerHTML += `<a href="#section-${nombreCat}" class="nav-tag">${nombreCat}</a>`;
+            // Si tu JSON tiene la estructura antigua (lista plana), la agrupamos aquí:
+            const productos = data.productos || [];
+            const categoriasAgrupadas = productos.reduce((acc, p) => {
+                const cat = p.categoria || 'General';
+                if (!acc[cat]) acc[cat] = [];
+                acc[cat].push(p);
+                return acc;
+            }, {});
 
-            // 2. Crear la sección visual
-            const section = document.createElement('section');
-            section.id = `section-${nombreCat}`;
-            section.innerHTML = `
-                <div class="category-header" style="margin: 40px 0 20px;">
-                    <h2 style="background: #232f3e; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block;">${nombreCat}</h2>
-                </div>
-                <div class="grid" id="grid-${nombreCat}"></div>
-            `;
-            mainContent.appendChild(section);
+            for (const [nombreCat, lista] of Object.entries(categoriasAgrupadas)) {
+                // Crear botón nav
+                nav.innerHTML += `<a href="#section-${nombreCat}" class="nav-tag">${nombreCat}</a>`;
 
-            // 3. Llenar el grid de esa sección con sus productos
-            const grid = document.getElementById(`grid-${nombreCat}`);
-            productos.forEach(p => {
-                grid.innerHTML += `
-                    <div class="card">
-                        <div class="img-box"><img src="${p.imagen}" alt="${p.nombre}"></div>
-                        <div class="info">
-                            <h3>${p.nombre}</h3>
-                            <p class="resumen">${p.resumen}</p>
-                            <div class="price">${p.precio}</div>
-                            <a href="${p.url}" class="btn" target="_blank">Ver en Amazon</a>
+                // Crear sección
+                const section = document.createElement('section');
+                section.id = `section-${nombreCat}`;
+                
+                // Generar el HTML de las tarjetas
+                let cardsHtml = '';
+                lista.forEach(p => {
+                    // Usamos || para que funcione con "precio" o "precio_amazon" según tu Python
+                    const precioMostrar = p.precio || p.precio_amazon + "€";
+                    const descResumen = p.resumen || "Producto recomendado por su calidad y precio.";
+                    
+                    cardsHtml += `
+                        <div class="card">
+                            <div class="img-box"><img src="${p.imagen}" alt="${p.nombre}"></div>
+                            <div class="info">
+                                <h3>${p.nombre}</h3>
+                                <p class="resumen">${descResumen}</p>
+                                <div class="price">${precioMostrar}</div>
+                                <a href="${p.url_afiliado || p.url}" class="btn" target="_blank">Ver en Amazon</a>
+                            </div>
                         </div>
-                    </div>
+                    `;
+                });
+
+                section.innerHTML = `
+                    <div class="category-header"><h2>${nombreCat}</h2></div>
+                    <div class="grid">${cardsHtml}</div>
                 `;
-            });
+                mainContent.appendChild(section);
+            }
+        } catch (e) {
+            console.error("Error:", e);
+            document.getElementById('main-content').innerHTML = "<h3>Cargando recomendaciones...</h3><p>Si no aparecen, asegúrate de haber ejecutado update_prices.py</p>";
         }
-    } catch (e) {
-        console.error("Error cargando productos:", e);
-        document.getElementById('main-content').innerHTML = "Error al cargar los productos.";
     }
-}
-load();
+    load();
+</script>
 </body>
 </html>
