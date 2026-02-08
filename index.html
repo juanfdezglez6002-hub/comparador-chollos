@@ -189,19 +189,15 @@
 <script>
     async function loadContent() {
         try {
-            // Fetch con timestamp para evitar caché
             const response = await fetch('data.json?v=' + Date.now());
             const data = await response.json();
             
             const mainContent = document.getElementById('main-content');
             const nav = document.getElementById('cat-nav');
 
-            // Limpiamos el mensaje de carga
             mainContent.innerHTML = '';
             nav.innerHTML = '';
 
-            // 1. Agrupar productos por categoría
-            // Esto permite que el JSON pueda venir en cualquier orden
             const categoriasMap = data.productos.reduce((acc, producto) => {
                 const cat = producto.categoria || 'General';
                 if (!acc[cat]) acc[cat] = [];
@@ -209,28 +205,24 @@
                 return acc;
             }, {});
 
-            // 2. Ordenar categorías alfabéticamente
             const nombresCategorias = Object.keys(categoriasMap).sort();
 
-            // 3. Crear el HTML para cada categoría
             nombresCategorias.forEach(nombreCat => {
-                
-                // ID limpio para los enlaces (quita espacios)
                 const sectionId = "section-" + nombreCat.replace(/\s+/g, '-').toLowerCase();
-
-                // Añadir botón al menú superior
                 nav.innerHTML += `<a href="#${sectionId}" class="nav-tag">${nombreCat}</a>`;
 
-                // Crear la sección y el grid
                 const section = document.createElement('section');
                 section.id = sectionId;
                 
                 let cardsHtml = '';
                 categoriasMap[nombreCat].forEach(p => {
+                    // AQUÍ ESTÁ EL CAMBIO: p.imagen (minúscula) debe coincidir con tu data.json
                     cardsHtml += `
                         <article class="card">
                             <div class="img-box">
-                                <img src="${p.imagen}" alt="${p.nombre}" loading="lazy">
+                                <img src="${p.imagen}" alt="${p.nombre}" 
+                                     onerror="this.src='https://via.placeholder.com/200?text=Cargando...'" 
+                                     loading="lazy">
                             </div>
                             <div class="info">
                                 <h3>${p.nombre}</h3>
@@ -259,13 +251,10 @@
             document.getElementById('main-content').innerHTML = `
                 <div id="loading-msg">
                     <p>No se han podido cargar los productos.</p>
-                    <small>Asegúrate de que 'data.json' existe y tiene el formato correcto.</small>
                 </div>
             `;
         }
     }
-
-    // Iniciar carga
     loadContent();
 </script>
 
