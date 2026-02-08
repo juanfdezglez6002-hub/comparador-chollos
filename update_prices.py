@@ -29,14 +29,18 @@ ID_AFILIADO = "chukukfuku01-21"
 def generar_data_json():
     resultados = []
     
-    for p in PRODUCTOS:
-        # Aquí el script simplemente copia lo que tú has escrito arriba
+for p in PRODUCTOS:
+        # 1. Definimos la variable (esto es lo que faltaba y daba error)
+        asin_limpio = str(p.get("asin", "")).strip()
+        
+        # 2. Ahora sí la usamos para construir los datos
         resultados.append({
             "nombre": p.get("nombre"),
             "categoria": p.get("cat"),
-            "precio": p.get("precio_manual"), # Lee tu precio manual
+            "precio": p.get("precio_manual"),
             "resumen": p.get("resumen"),
-            "url": f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}",
+            "url": f"https://www.amazon.es/dp/{asin_limpio}?tag={ID_AFILIADO}",
+            # Usamos el formato de imagen más compatible que existe:
             "imagen": f"https://images.amazon.com/images/P/{asin_limpio}.01._SL400_.jpg"
         })
     
