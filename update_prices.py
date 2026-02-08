@@ -30,17 +30,16 @@ def generar_data_json():
     resultados = []
     
     for p in PRODUCTOS:
-        # Usamos .get() por seguridad y p["precio_real"] que es como lo tienes arriba
+        # Aquí el script simplemente copia lo que tú has escrito arriba
         resultados.append({
-            "nombre": p.get("nombre", "Producto sin nombre"),
-            "categoria": p.get("cat", "General"),
-            "precio": str(p.get("precio_real", "Consultar")), # Usamos precio_real
-            "resumen": p.get("resumen", "Recomendado por su calidad-precio."),
+            "nombre": p.get("nombre"),
+            "categoria": p.get("cat"),
+            "precio": p.get("precio_manual"), # Lee tu precio manual
+            "resumen": p.get("resumen"),
             "url": f"https://www.amazon.es/dp/{p['asin']}?tag={ID_AFILIADO}",
             "imagen": f"https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN={p['asin']}&Format=_SL400_&ID=AsinImage&MarketPlace=ES&ServiceVersion=20070822"
         })
     
-    # Generar el JSON final
     data = {
         "last_updated": datetime.now().strftime("%d/%m/%Y %H:%M"),
         "productos": resultados
@@ -49,8 +48,7 @@ def generar_data_json():
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
     
-    print(f"✅ JSON actualizado con {len(resultados)} productos.")
+    print(f"✅ Hecho. He metido {len(resultados)} productos con tus precios.")
 
-# ESTO DEBE IR FUERA DE LA FUNCIÓN (SIN ESPACIOS AL PRINCIPIO)
 if __name__ == "__main__":
     generar_data_json()
