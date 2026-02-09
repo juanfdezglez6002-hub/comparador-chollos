@@ -5,7 +5,7 @@ from datetime import datetime
 # Aquí añades todo lo que quieras recomendar
 PRODUCTOS = [
     # ALIMENTACIÓN
-    {"asin": "4bCUHSG", "nombre": "Estrella Galicia Especial (Pack 24 latas de 33 cl)", "cat": "Alimentación", "precio_manual": "14,99€", "resumen": "Pack ahorro ideal para los amantes de la cerveza."},
+    {"asin": "B07B81842Y", "nombre": "Estrella Galicia Especial (Pack 24 latas de 33 cl)", "cat": "Alimentación", "precio_manual": "14,99€", "resumen": "Pack ahorro ideal para los amantes de la cerveza."},
     # GAMING
     {"asin": "B08H7SRTZ8", "nombre": "Consola PlayStation 5 Slim", "cat": "Gaming", "precio_manual": "494,99€", "resumen": "La mejor experiencia de juego actual."},
     # ELECTRÓNICA
