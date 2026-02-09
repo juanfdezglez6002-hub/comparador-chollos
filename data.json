@@ -1,13 +1,13 @@
 {
-    "last_updated": "09/02/2026 08:51",
+    "last_updated": "09/02/2026 08:56",
     "productos": [
         {
-            "nombre": "Coca-Cola Zero Azúcar (Pack 12)",
+            "nombre": "Estrella Galicia Especial (Pack 24 latas de 33 cl)",
             "categoria": "Alimentación",
-            "precio": "10,80€",
-            "resumen": "Pack ahorro ideal para casa.",
-            "url": "https://www.amazon.es/dp/B0071Z164V?tag=chukukfuku01-21",
-            "imagen": "https://images.amazon.com/images/P/B0071Z164V.01._SL400_.jpg"
+            "precio": "14,99€",
+            "resumen": "Pack ahorro ideal para los amantes de la cerveza.",
+            "url": "https://www.amazon.es/dp/4bCUHSG?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/4bCUHSG.01._SL400_.jpg"
         },
         {
             "nombre": "Consola PlayStation 5 Slim",
