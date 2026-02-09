@@ -1,5 +1,5 @@
 {
-    "last_updated": "09/02/2026 13:12",
+    "last_updated": "09/02/2026 18:34",
     "productos": [
         {
             "nombre": "Estrella Galicia Especial (Pack 24 latas de 33 cl)",
@@ -8,6 +8,14 @@
             "resumen": "Pack ahorro ideal para los amantes de la cerveza.",
             "url": "https://www.amazon.es/dp/B07B81842Y?tag=chukukfuku01-21",
             "imagen": "https://images.amazon.com/images/P/B07B81842Y.01._SL400_.jpg"
+        },
+        {
+            "nombre": "Lavazza, Qualità Oro, Café en Grano Natural,Paquete de 1 kg",
+            "categoria": "Alimentación",
+            "precio": "29,79€",
+            "resumen": "Un café con cuerpo e intenso con una buena relación calidad precio.",
+            "url": "https://www.amazon.es/dp/B0049U0DMC?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B0049U0DMC.01._SL400_.jpg"
         },
         {
             "nombre": "Consola PlayStation 5 Slim",
