@@ -208,8 +208,9 @@
 </div>
 
 <script>
-    // Variable global para guardar los productos una vez cargados
+// Variables globales
     let allProducts = [];
+    let currentCategory = 'Todos'; // Guardamos la categoría actual
 
     async function loadContent() {
         try {
@@ -224,7 +225,6 @@
 
             // 2. Crear botones de navegación
             nav.innerHTML = '';
-            // Botón para ver "Todos" por si el usuario quiere volver atrás
             nav.innerHTML += `<a href="#" class="nav-tag" onclick="renderCategory('Todos')">Todos</a>`;
             
             categorias.forEach(cat => {
@@ -240,34 +240,46 @@
         }
     }
 
-    function renderCategory(category) {
+    // Función para renderizar con filtro de búsqueda
+    function renderCategory(category, searchText = '') {
+        currentCategory = category; // Actualizamos la categoría global
         const mainContent = document.getElementById('main-content');
-        mainContent.innerHTML = ''; // Limpiamos la pantalla
+        mainContent.innerHTML = ''; 
 
-        // Filtrar productos
-        const filtered = (category === 'Todos') 
+        // 1. Filtrar por categoría
+        let filtered = (category === 'Todos') 
             ? allProducts 
             : allProducts.filter(p => p.categoria === category);
 
-        // Crear la estructura de la sección
+        // 2. Filtrar por texto si el usuario ha escrito algo
+        if (searchText) {
+            filtered = filtered.filter(p => 
+                p.nombre.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
+
         const section = document.createElement('section');
-        
         let cardsHtml = '';
-        filtered.forEach(p => {
-            cardsHtml += `
-                <article class="card">
-                    <div class="img-box">
-                        <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/200?text=Cargando...'" loading="lazy">
-                    </div>
-                    <div class="info">
-                        <h3>${p.nombre}</h3>
-                        <p class="resumen">${p.resumen}</p>
-                        <div class="price">${p.precio}</div>
-                        <a href="${p.url}" class="btn" target="_blank">Ver en Amazon</a>
-                    </div>
-                </article>
-            `;
-        });
+        
+        if (filtered.length === 0) {
+            cardsHtml = `<p style="text-align:center; padding:50px; color:#666;">No se han encontrado productos que coincidan con "${searchText}" en ${category}.</p>`;
+        } else {
+            filtered.forEach(p => {
+                cardsHtml += `
+                    <article class="card">
+                        <div class="img-box">
+                            <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/200?text=Cargando...'" loading="lazy">
+                        </div>
+                        <div class="info">
+                            <h3>${p.nombre}</h3>
+                            <p class="resumen">${p.resumen}</p>
+                            <div class="price">${p.precio}</div>
+                            <a href="${p.url}" class="btn" target="_blank">Ver en Amazon</a>
+                        </div>
+                    </article>
+                `;
+            });
+        }
 
         section.innerHTML = `
             <div class="category-header">
@@ -279,10 +291,12 @@
         `;
         
         mainContent.appendChild(section);
-        
-        // Hacer scroll hacia arriba suave al cambiar de pestaña
-        window.scrollTo({top: 0, behavior: 'smooth'});
     }
+
+    // Escuchar lo que el usuario escribe en el buscador
+    document.getElementById('search-input').addEventListener('input', (e) => {
+        renderCategory(currentCategory, e.target.value);
+    });
 
     loadContent();
 </script>
