@@ -1,5 +1,5 @@
 {
-    "last_updated": "09/02/2026 18:34",
+    "last_updated": "09/02/2026 21:46",
     "productos": [
         {
             "nombre": "Estrella Galicia Especial (Pack 24 latas de 33 cl)",
@@ -16,6 +16,22 @@
             "resumen": "Un café con cuerpo e intenso con una buena relación calidad precio.",
             "url": "https://www.amazon.es/dp/B0049U0DMC?tag=chukukfuku01-21",
             "imagen": "https://images.amazon.com/images/P/B0049U0DMC.01._SL400_.jpg"
+        },
+        {
+            "nombre": "NESCAFÉ Dolce Gusto Café con Leche - Cápsulas de Café, 90 Cápsulas",
+            "categoria": "Alimentación",
+            "precio": "24,75€",
+            "resumen": "Un café en cápsulas de calidad con rapidez de preparación, pack duradero.",
+            "url": "https://www.amazon.es/dp/B013W8QZXM?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B013W8QZXM.01._SL400_.jpg"
+        },
+        {
+            "nombre": "Coca Cola Sabor Original Pack de 24 Latas 330 ml",
+            "categoria": "Alimentación",
+            "precio": "15,79€",
+            "resumen": "Tu refresco de Cola de  siempre a un buen precio y con el sabor de siempre.",
+            "url": "https://www.amazon.es/dp/B00DPKUKPC?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B00DPKUKPC.01._SL400_.jpg"
         },
         {
             "nombre": "Consola PlayStation 5 Slim",
