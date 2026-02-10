@@ -1,5 +1,5 @@
 {
-    "last_updated": "10/02/2026 19:06",
+    "last_updated": "10/02/2026 19:40",
     "productos": [
         {
             "nombre": "Estrella Galicia Especial (Pack 24 latas de 33 cl)",
@@ -32,6 +32,54 @@
             "resumen": "Tu refresco de Cola de  siempre a un buen precio y con el sabor de siempre.",
             "url": "https://www.amazon.es/dp/B00DPKUKPC?tag=chukukfuku01-21",
             "imagen": "https://images.amazon.com/images/P/B00DPKUKPC.01._SL400_.jpg"
+        },
+        {
+            "nombre": "NESTLÉ Caja Roja Bombones de Chocolate con leche",
+            "categoria": "Alimentación",
+            "precio": "5,95€",
+            "resumen": " Deliciosos bombones con buena relación calidad-precio. Ideales para realizar un buen regalo.",
+            "url": "https://www.amazon.es/dp/B00UI1R6M6?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B00UI1R6M6.01._SL400_.jpg"
+        },
+        {
+            "nombre": "Leche Entera Central Lechera Asturiana Pack 6 x 1L",
+            "categoria": "Alimentación",
+            "precio": "7,38€",
+            "resumen": "Leche de buena calidad con gran sabor con un buen precio mereciendo la pena",
+            "url": "https://www.amazon.es/dp/B01LZIMTSC?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B01LZIMTSC.01._SL400_.jpg"
+        },
+        {
+            "nombre": "Caldo Casero de Pollo 100% Natural GALLINA BLANCA",
+            "categoria": "Alimentación",
+            "precio": "6,99€",
+            "resumen": "Caldo muy sabroso y rico en sabor. Buena relación calidad-precio ya que ofrece un pack de ahorro.",
+            "url": "https://www.amazon.es/dp/B01IU8MJ7K?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B01IU8MJ7K.01._SL400_.jpg"
+        },
+        {
+            "nombre": "Chicle Sin Azúcar PUR Gum con Xilitol, Vegano, Sin Aspartamo y Sin Gluten (Paquede de 1 unidad con 55 unidades",
+            "categoria": "Alimentación",
+            "precio": "4,49€",
+            "resumen": "Chicles buenos y espectaculares en términos de calidad. Sin azúcar ni aditivos raros, no tienen edulcorantes dañinos.",
+            "url": "https://www.amazon.es/dp/B00JBWHJ5C?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B00JBWHJ5C.01._SL400_.jpg"
+        },
+        {
+            "nombre": "Salsa Sriracha Mayo Go-Tan 215ml",
+            "categoria": "Alimentación",
+            "precio": "3,22€",
+            "resumen": "Salsa con un punto perfecto de picante y sabor, ideal para acompañar tacos y sushi.",
+            "url": "https://www.amazon.es/dp/B09XR5YFFM?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B09XR5YFFM.01._SL400_.jpg"
+        },
+        {
+            "nombre": "ColaCao Original, Cacao Soluble Natural sin Aditivos, Formato Ahorro XXL, 5,9 kg",
+            "categoria": "Alimentación",
+            "precio": "36,99€",
+            "resumen": "Precio genial manteniendo la calidad característica de la marca con un sabor genial y maravilloso.",
+            "url": "https://www.amazon.es/dp/B0FLQC89LM?tag=chukukfuku01-21",
+            "imagen": "https://images.amazon.com/images/P/B0FLQC89LM.01._SL400_.jpg"
         },
         {
             "nombre": "Consola PlayStation 5 Slim",
