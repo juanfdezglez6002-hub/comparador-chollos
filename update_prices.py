@@ -9,6 +9,14 @@ PRODUCTOS = [
     {"asin": "B0049U0DMC", "nombre": "Lavazza, Qualità Oro, Café en Grano Natural,Paquete de 1 kg", "cat": "Alimentación", "precio_manual": "29,79€", "resumen": "Un café con cuerpo e intenso con una buena relación calidad precio."},
     {"asin": "B013W8QZXM", "nombre": "NESCAFÉ Dolce Gusto Café con Leche - Cápsulas de Café, 90 Cápsulas", "cat": "Alimentación", "precio_manual": "24,75€", "resumen": "Un café en cápsulas de calidad con rapidez de preparación, pack duradero."},
     {"asin": "B00DPKUKPC", "nombre": "Coca Cola Sabor Original Pack de 24 Latas 330 ml", "cat": "Alimentación", "precio_manual": "15,79€", "resumen": "Tu refresco de Cola de  siempre a un buen precio y con el sabor de siempre."},
+    {"asin": "B00UI1R6M6", "nombre": "NESTLÉ Caja Roja Bombones de Chocolate con leche", "cat": "Alimentación", "precio_manual": "5,95€", "resumen": " Deliciosos bombones con buena relación calidad-precio. Ideales para realizar un buen regalo."},
+    {"asin": "B01LZIMTSC", "nombre": "Leche Entera Central Lechera Asturiana Pack 6 x 1L", "cat": "Alimentación", "precio_manual": "7,38€", "resumen": "Leche de buena calidad con gran sabor con un buen precio mereciendo la pena"},
+    {"asin": "B01IU8MJ7K", "nombre": "Caldo Casero de Pollo 100% Natural GALLINA BLANCA", "cat": "Alimentación", "precio_manual": "6,99€", "resumen": "Caldo muy sabroso y rico en sabor. Buena relación calidad-precio ya que ofrece un pack de ahorro."},
+    {"asin": "B00JBWHJ5C", "nombre": "Chicle Sin Azúcar PUR Gum con Xilitol, Vegano, Sin Aspartamo y Sin Gluten (Paquede de 1 unidad con 55 unidades", "cat": "Alimentación", "precio_manual": "4,49€", "resumen": "Chicles buenos y espectaculares en términos de calidad. Sin azúcar ni aditivos raros, no tienen edulcorantes dañinos."},
+    {"asin": "B09XR5YFFM", "nombre": "Salsa Sriracha Mayo Go-Tan 215ml", "cat": "Alimentación", "precio_manual": "3,22€", "resumen": "Salsa con un punto perfecto de picante y sabor, ideal para acompañar tacos y sushi."},
+    {"asin": "B0FLQC89LM", "nombre": "ColaCao Original, Cacao Soluble Natural sin Aditivos, Formato Ahorro XXL, 5,9 kg", "cat": "Alimentación", "precio_manual": "36,99€", "resumen": "Precio genial manteniendo la calidad característica de la marca con un sabor genial y maravilloso."},
+
+    
 
     # GAMING
     {"asin": "B08H7SRTZ8", "nombre": "Consola PlayStation 5 Slim", "cat": "Gaming", "precio_manual": "494,99€", "resumen": "La mejor experiencia de juego actual."},
