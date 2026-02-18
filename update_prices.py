@@ -5,7 +5,7 @@ from datetime import datetime
 # Aquí añades todo lo que quieras recomendar
 PRODUCTOS = [
     # ALIMENTACIÓN
-    {"asin": "B07B81842Y", "nombre": "Estrella Galicia Especial (Pack 24 latas de 33 cl)", "cat": "Alimentación", "precio_manual": "14,99€", "resumen": "Pack ahorro ideal para los amantes de la cerveza."},
+    {"asin": "B07B81842Y", "nombre": "Estrella Galicia Especial (Pack 24 latas de 33 cl)", "cat": "Alimentación", "precio_manual": "15,99€", "resumen": "Pack ahorro ideal para los amantes de la cerveza."},
     {"asin": "B0049U0DMC", "nombre": "Lavazza, Qualità Oro, Café en Grano Natural,Paquete de 1 kg", "cat": "Alimentación", "precio_manual": "29,79€", "resumen": "Un café con cuerpo e intenso con una buena relación calidad precio."},
     {"asin": "B013W8QZXM", "nombre": "NESCAFÉ Dolce Gusto Café con Leche - Cápsulas de Café, 90 Cápsulas", "cat": "Alimentación", "precio_manual": "24,75€", "resumen": "Un café en cápsulas de calidad con rapidez de preparación, pack duradero."},
     {"asin": "B00DPKUKPC", "nombre": "Coca Cola Sabor Original Pack de 24 Latas 330 ml", "cat": "Alimentación", "precio_manual": "15,79€", "resumen": "Tu refresco de Cola de  siempre a un buen precio y con el sabor de siempre."},
