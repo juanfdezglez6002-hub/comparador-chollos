@@ -5,22 +5,20 @@ on:
     - cron: '0 */6 * * *' # Se ejecuta cada 6 horas
   workflow_dispatch: # Permite ejecutarlo manualmente
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configurar Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
-
-      - name: Instalar dependencias
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+          python-version: '3.12'
 
       - name: Ejecutar script de comparación
         run: python update_prices.py
